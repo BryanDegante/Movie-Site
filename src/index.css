@@ -8,6 +8,14 @@
     
 }
 
+.App{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+
 a {
     text-decoration: none;
     color: #fff
@@ -233,7 +241,7 @@ header {
     align-items: center;
     text-align: center;
     background-color: #000000f1;
-    padding: 12px 0;
+    padding: 48px 0 0 0;
 }
 
 .landing__text--header {
@@ -292,6 +300,9 @@ MOVIE LIST SECTION
 */
 
 #movies__main {
+    display: flex;
+    flex: 1;
+    justify-content: center;
     padding: 0 32px;
 }
 
@@ -311,6 +322,26 @@ input[type="range"]::-webkit-slider-runnable-track {
     height: 15px;
     background: #FFD700;
     border-radius: 16px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    position: relative;
+    right: 20px;
+
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+    background-color: #fff;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .year {
@@ -355,17 +386,19 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .movie {
     width: calc(100% / 6);
-    margin: 8px 16px;
-    padding: 0 16px;
+    margin: 16px 16px;
     text-align: center;
     transition: all 300ms ease;
     cursor: pointer;
+    background-color: rgba(49, 49, 49, 0.432);
+    border-radius: 10px;
 }
 
 .movie__list--poster {
     max-height: 300px;
     max-width: 300px;
-    padding: 16px;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 .movie:hover {
@@ -379,7 +412,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .movie__description {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 700;
 }
 

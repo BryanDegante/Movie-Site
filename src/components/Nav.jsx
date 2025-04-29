@@ -23,12 +23,12 @@ const Nav = () => {
 				<div className="link__list">
 					<ul>
 						<li>
-							<Link
-								to="/"
+							<a
+								href="/"
 								className="nav__link link__hover--effect"
 							>
 								Home
-							</Link>
+							</a>
 						</li>
 					</ul>
 					<button

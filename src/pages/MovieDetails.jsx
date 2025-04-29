@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { baseUrl, KEY } from '../constants';
 import Poster from '../components/ui/poster';
 import { IoMdArrowBack } from 'react-icons/io';
@@ -9,7 +9,7 @@ import DetailsCard from '../components/DetailsCard';
 const MovieDetails = () => {
 	const { id } = useParams();
 	const [movie, setMovie] = useState({});
-
+	let navigate = useNavigate()
 	async function getDetails() {
 		const results = await axios.get(`${baseUrl}movie/${id}?api_key=${KEY}`);
 		setMovie(results.data);
@@ -26,7 +26,7 @@ const MovieDetails = () => {
 					<div className="back__button--wrapper">
 						<button
 							className="back__button"
-							onClick="javascript:window.history.back();"
+							onClick={() => navigate(`/Movies`)}
 						>
                             <IoMdArrowBack className='fa-arrow-left' />
                             Back

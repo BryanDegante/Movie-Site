@@ -1,46 +1,27 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 import { GrFormPrevious } from 'react-icons/gr';
 import { MdNavigateNext } from 'react-icons/md';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const Movies = () => {
-	const [movies, setMovies] = useState([]);
-	const [resultsTotal, setResultsTotal] = useState(0);
-	const [page, setPage] = useState(1);
-	const [totalPages, setTotalPages] = useState();
+const Movies = ({ movies, page, totalPages, resultsTotal, prevPage,nextPage }) => {
 	let navigate = useNavigate();
 
-	const baseUrl = process.env.REACT_APP_TMBD_BASE_URL;
-	const KEY = process.env.REACT_APP_TMBD_API_KEY;
 
-	async function getMovies(page) {
-		const { data } = await axios.get(
-			`${baseUrl}search/movie?api_key=${KEY}&query=superman&page=${page}`
-		);
-		console.log(data);
-		setMovies(data.results);
-		setResultsTotal(data.total_results);
-		setTotalPages(data.total_pages);
-	}
-
-	function prevPage() {
+	function prevMoviePage() {
 		if (page !== 1) {
-			setPage(page - 1);
+			page = page - 1;
+			prevPage(page);
 		}
 	}
-	function nextPage() {
-		if (page !== totalPages) {
-			setPage(page + 1);
-		}
-	}
-	
 
-	useEffect(() => {
-		console.log(movies);
-		getMovies(page);
-	}, [page]);
+	function nextMoviePage() {
+		if (page !== totalPages) {
+			page = page + 1;
+			nextPage(page)
+		}
+	}
+
 
 	return (
 		<section id="movies__main">
@@ -66,14 +47,14 @@ const Movies = () => {
 					<div className="page__list">
 						<GrFormPrevious
 							className="page__button"
-							onClick={prevPage}
+							onClick={prevMoviePage}
 						/>
 						<p className="total-pages">
 							{page} of {totalPages}
 						</p>
 						<MdNavigateNext
 							className="page__button"
-							onClick={nextPage}
+							onClick={nextMoviePage}
 						/>
 					</div>
 				</div>
