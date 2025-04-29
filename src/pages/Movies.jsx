@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 import { GrFormPrevious } from 'react-icons/gr';
 import { MdNavigateNext } from 'react-icons/md';
+import {  useNavigate } from 'react-router-dom';
 
 const Movies = () => {
 	const [movies, setMovies] = useState([]);
 	const [resultsTotal, setResultsTotal] = useState(0);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState();
+	let navigate = useNavigate();
 
 	const baseUrl = process.env.REACT_APP_TMBD_BASE_URL;
 	const KEY = process.env.REACT_APP_TMBD_API_KEY;
@@ -36,6 +38,7 @@ const Movies = () => {
 	
 
 	useEffect(() => {
+		console.log(movies);
 		getMovies(page);
 	}, [page]);
 
@@ -56,7 +59,7 @@ const Movies = () => {
 								date={movie.release_date}
 								key={movie.id}
 								id={movie.id}
-								poster={movie.poster_path}
+								posterPath={movie.poster_path}
 							/>
 						))}
 					</div>

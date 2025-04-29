@@ -13,22 +13,22 @@ const Nav = () => {
 	return (
 		<nav>
 			<div className="nav__container">
-				<a href="index.html">
+				<Link to ="/">
 					<img
-						src="./assets/blinker-icon.4f9b2663.png"
+						src="/blinker-icon.4f9b2663.png"
 						className="logo"
 						alt=""
 					/>
-				</a>
+				</Link>
 				<div className="link__list">
 					<ul>
 						<li>
-							<a
-								href="index.html"
+							<Link
+								to="/"
 								className="nav__link link__hover--effect"
 							>
 								Home
-							</a>
+							</Link>
 						</li>
 					</ul>
 					<button
@@ -50,19 +50,16 @@ const Nav = () => {
 							</h1>
 							<button
 								className="filter__choice--button"
-								onClick="changeType('movie')"
 							>
 								Movie
 							</button>
 							<button
 								className="filter__choice--button"
-								onClick="changeType('show')"
 							>
 								Show
 							</button>
 							<button
 								className="filter__choice--button"
-								onClick="changeType('game')"
 							>
 								Game
 							</button>
@@ -80,20 +77,17 @@ const Nav = () => {
 								</p>
 								<button
 									className="reset__button"
-									onClick="resetYear()"
 								>
 									Reset Year
 								</button>
 							</div>
 							<button
 								className="filter__choice--resetButtons"
-								onClick="applyFilters('show')"
 							>
 								Apply Filters
 							</button>
 							<button
 								className="filter__choice--resetButtons"
-								onClick="resetFilters('show')"
 							>
 								Reset Filters
 							</button>

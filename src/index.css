@@ -227,6 +227,14 @@ header {
     align-items: center;
     text-align: center;
 }
+.searchbar__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #000000f1;
+    padding: 12px 0;
+}
 
 .landing__text--header {
     font-size: 48px;
@@ -270,11 +278,11 @@ header {
     position: absolute;
     opacity: 0.5;
     font-size: 24px;
-    color: #fff;
+    color: #ffffff;
     top: 0;
     right: 0;
     bottom: 0;
-    margin: 4px 8px;
+    margin: 8px 8px;
 }
 
 /*
@@ -361,8 +369,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .movie:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    filter: brightness(50%);
+    box-shadow: 0 8px 16px 0 rgba(253, 253, 253, 0.2);
+    filter: brightness(60%);
     transform: scale(1.1);
 }
 
@@ -459,7 +467,7 @@ SINGLE MOVIE SECTION
 }
 
 .movie__wrapper {
-    display: flex;
+    display: flex; 
     justify-content: space-between;
     padding-top: 32px;
 }
