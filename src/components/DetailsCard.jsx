@@ -1,5 +1,6 @@
 import React from "react"
 import Poster from "./ui/poster";
+import Backdrop from "./ui/Backdrop";
 
 const DetailsCard = ({ movie }) => {
   const genres = movie.genres || [];
@@ -8,6 +9,7 @@ const DetailsCard = ({ movie }) => {
   return (
 		<>
 			<div className="movie__wrapper">
+				
 				<Poster
 					path={movie.poster_path}
 					className={'movie__poster'}
@@ -23,8 +25,8 @@ const DetailsCard = ({ movie }) => {
 						<span className="blue">{movie.runtime} min</span>
 					</div>
 					<div className="movie__Age-rating">
-						<span className="sub-heading white bold">Rated</span>
-						<span className="blue">${movie.Rated}</span>
+						<span className="sub-heading white bold">Language</span>
+						<span className="blue">{movie.original_language}</span>
 					</div>
 					<div className="movie__Director">
 						<span className="sub-heading white bold">Director</span>
@@ -42,7 +44,8 @@ const DetailsCard = ({ movie }) => {
 						<span className="sub-heading white bold">Genre</span>
 						{genres.map((g) => (
 							<span className="blue" key={g.id}>
-							  {g.name} 
+								
+								| {g.name} |
 							</span>
 						))}
 					</div>

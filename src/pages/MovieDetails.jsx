@@ -5,11 +5,13 @@ import { baseUrl, KEY } from '../constants';
 import Poster from '../components/ui/poster';
 import { IoMdArrowBack } from 'react-icons/io';
 import DetailsCard from '../components/DetailsCard';
+import { FaStar } from 'react-icons/fa';
+import Backdrop from '../components/ui/Backdrop';
 
 const MovieDetails = () => {
 	const { id } = useParams();
 	const [movie, setMovie] = useState({});
-	let navigate = useNavigate()
+	let navigate = useNavigate();
 	async function getDetails() {
 		const results = await axios.get(`${baseUrl}movie/${id}?api_key=${KEY}`);
 		setMovie(results.data);
@@ -21,17 +23,17 @@ const MovieDetails = () => {
 
 	return (
 		<section id="movie__info">
-			<div className="container">
+			<div className="container ">
 				<div className="row">
-					<div className="back__button--wrapper">
-						<button
-							className="back__button"
-							onClick={() => navigate(`/Movies`)}
-						>
-                            <IoMdArrowBack className='fa-arrow-left' />
-                            Back
-						</button>
-					</div>
+						<div className="back__button--wrapper">
+							<button
+								className="back__button"
+								onClick={() => navigate(`/Movies`)}
+							>
+								<IoMdArrowBack className="fa-arrow-left" />
+								Back
+							</button>
+						</div>
 					<div className="movie__description--single">
 						<div className="movie__description--header">
 							<h1 className="movie__title--single white">
@@ -40,17 +42,22 @@ const MovieDetails = () => {
 							<ul className="movie__ratings--list">
 								<li className="movie__rating">
 									<span className="sub-heading white bold">
-										IMDB Rating 
+										IMDB Rating
 									</span>
-									<i className="fa-solid fa-star"></i>
+									<FaStar className="fa-solid fa-star" />
 									<span className="blue">
-										{movie.imdbRating}
+										{Math.ceil(movie.vote_average).toFixed(1)}
 									</span>
 								</li>
 							</ul>
-                        </div>
-                        <DetailsCard movie={movie} />
+						</div>
+						<DetailsCard movie={movie} />
 					</div>
+					<Backdrop
+						backPath={movie.backdrop_path}
+						className={''}
+						figureClass={'backdrop'}
+					/>
 				</div>
 			</div>
 		</section>
