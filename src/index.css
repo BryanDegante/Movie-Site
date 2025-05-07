@@ -565,6 +565,13 @@ TV LIST SECTION
     font-weight: 700;
 }
 
+.tagline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 /*
 
 SINGLE MOVIE SECTION

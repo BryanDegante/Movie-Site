@@ -14,7 +14,7 @@ const MovieCard = ({ title, date, id, posterPath }) => {
 				<Poster path={posterPath} className={'movie__list--poster'} />
 				<div className="movie__description">
 					<h3 className="movie__title white">{title}</h3>
-					<p className="movie__year white">{date} </p>
+					<p className="movie__year white">{date.slice(0,4)} </p>
 				</div>
 		</div>
 	);

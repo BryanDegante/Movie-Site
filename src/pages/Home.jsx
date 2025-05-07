@@ -4,7 +4,7 @@ import MovieCarousel from '../components/MovieCarousel';
 import ShowCard from '../components/ShowCard';
 
 
-const Home = ({trendingMovies, trendingTv}) => {
+const Home = ({trendingMovies, trendingTv, popularMovies, nowPlaying}) => {
 	return (
 		<>
 			<section id = 'home'>
@@ -14,6 +14,34 @@ const Home = ({trendingMovies, trendingTv}) => {
 							<h3 className='white'>Trending Movies Today</h3>
 							<div className="movies">
 								{trendingMovies.slice(0, 5).map((movie) => (
+									<MovieCard
+										title={movie.title}
+										date={movie.release_date}
+										key={movie.id}
+										id={movie.id}
+										posterPath={movie.poster_path}
+									/>
+								))}
+							</div>
+						</div>
+						<div className="trending__container--movies">
+							<h3 className='white'>Popular Movies </h3>
+							<div className="movies">
+								{popularMovies.slice(0, 5).map((movie) => (
+									<MovieCard
+										title={movie.title}
+										date={movie.release_date}
+										key={movie.id}
+										id={movie.id}
+										posterPath={movie.poster_path}
+									/>
+								))}
+							</div>
+						</div>
+						<div className="trending__container--movies">
+							<h3 className='white'>Now Playing</h3>
+							<div className="movies">
+								{nowPlaying.slice(5, 10).map((movie) => (
 									<MovieCard
 										title={movie.title}
 										date={movie.release_date}

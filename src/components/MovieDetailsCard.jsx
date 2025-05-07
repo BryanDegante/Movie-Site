@@ -2,7 +2,7 @@ import React from "react"
 import Poster from "./ui/poster";
 import Backdrop from "./ui/Backdrop";
 
-const DetailsCard = ({ movie }) => {
+const MovieDetailsCard = ({ movie }) => {
   const genres = movie.genres || [];
 
   console.log(movie)
@@ -58,4 +58,4 @@ const DetailsCard = ({ movie }) => {
   );
 };
 
-export default DetailsCard;
+export default MovieDetailsCard;

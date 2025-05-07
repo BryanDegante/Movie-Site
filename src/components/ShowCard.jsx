@@ -8,7 +8,7 @@ const ShowCard = ({ title, date, id, posterPath }) => {
 	return (
 		<div
 			className="show"
-			onClick={() => navigate(`/MovieDetails/${id}`)}
+			onClick={() => navigate(`/ShowDetails/${id}`)}
 			key={id}
 		>
 			<Poster path={posterPath} className={'show__list--poster'} />
