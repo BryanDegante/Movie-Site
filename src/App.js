@@ -29,7 +29,6 @@ function App() {
     const { data } = await axios.get(
       `${baseUrl}search/movie?api_key=${KEY}&query=${name}&page=${page}`
     );
-    console.log(data)
     setMovies(data.results);
     setResultsTotal(data.total_results);
     setTotalPages(data.total_pages);
@@ -65,6 +64,7 @@ function App() {
   
   function searchMovies(name) {
     setName(name)
+    setPage(1)
     getMovies(page,name)
   }
   
@@ -79,6 +79,7 @@ function App() {
   
   useEffect(() => {
     getMovies(page, name)
+    console.log(page)
   }, [page,name]);
   useEffect(() => {
     getTrendingTv()
