@@ -46,7 +46,7 @@ const ShowDetails = () => {
 										IMDB Rating
 									</span>
 									<FaStar className="fa-solid fa-star" />
-									<span className="blue">
+									<span className="yellow">
 										{Math.ceil(show.vote_average).toFixed(
 											1
 										)}

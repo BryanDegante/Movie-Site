@@ -5,17 +5,17 @@ import { GrFormPrevious } from 'react-icons/gr';
 import { MdNavigateNext } from 'react-icons/md';
 const MOVIES_PER_SLIDE = 4;
 
-const MovieCarousel = ({ movies , title }) => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const totalSlides = Math.ceil(movies.length / MOVIES_PER_SLIDE);
-  const goToSlide = (idx) => setSlideIndex(idx);
-  const nextSlide = () => setSlideIndex((prev) => (prev + 1) % totalSlides);
-  const prevSlide = () =>
+const TvCarousel = ({ movies, title }) => {
+	const [slideIndex, setSlideIndex] = useState(0);
+	const totalSlides = Math.ceil(movies.length / MOVIES_PER_SLIDE);
+	const goToSlide = (idx) => setSlideIndex(idx);
+	const nextSlide = () => setSlideIndex((prev) => (prev + 1) % totalSlides);
+	const prevSlide = () =>
 		setSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
 
-  const start = slideIndex * MOVIES_PER_SLIDE;
-  const end = start + MOVIES_PER_SLIDE;
-  const visibleMovies = movies.slice(start, end);
+	const start = slideIndex * MOVIES_PER_SLIDE;
+	const end = start + MOVIES_PER_SLIDE;
+	const visibleMovies = movies.slice(start, end);
 
 	return (
 		<div className="carousel__container--movies">
@@ -29,7 +29,7 @@ const MovieCarousel = ({ movies , title }) => {
 					{visibleMovies.map((movie, i) => (
 						<div className="slide" key={movie.id}>
 							<MovieCard
-								title={movie.title}
+								title={movie.original_name}
 								date={movie.release_date}
 								id={movie.id}
 								posterPath={movie.backdrop_path}
@@ -58,4 +58,4 @@ const MovieCarousel = ({ movies , title }) => {
 	);
 };
 
-export default MovieCarousel;
+export default TvCarousel;

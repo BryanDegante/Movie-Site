@@ -1,74 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
-import MovieCarousel from '../components/MovieCarousel';
 import ShowCard from '../components/ShowCard';
+import axios from 'axios';
+import { baseUrl, KEY } from '../constants';
+import MovieCarousel from '../components/MovieCarousel';
+import TvCarousel from '../components/TvCarousel copy';
+const MOVIES_PER_SLIDE = 4;
 
+const Home = () => {
+	const [trendingMovies, setTrendingMovies] = useState([]);
+	const [popularMovies, setPopularMovies] = useState([]);
+	const [nowPlaying, setNowPlaying] = useState([]);
+	const [trendingTv, setTrendingTv] = useState([]);
+	const [isLoading, setIsLoading] = useState();
 
-const Home = ({trendingMovies, trendingTv, popularMovies, nowPlaying}) => {
+	async function getTrendingMovies() {
+		const { data } = await axios.get(
+			`${baseUrl}trending/movie/day?language=en-US&api_key=${KEY}`
+		);
+
+		setTrendingMovies(data.results);
+	}
+
+	async function getPopularMovies() {
+		const { data } = await axios.get(
+			`${baseUrl}movie/popular?api_key=${KEY}`
+		);
+		setPopularMovies(data.results);
+	}
+	async function getNowPlaying() {
+		const { data } = await axios.get(
+			`${baseUrl}movie/now_playing?api_key=${KEY}`
+		);
+		setNowPlaying(data.results);
+	}
+	async function getTrendingTv() {
+		const { data } = await axios.get(
+			`${baseUrl}trending/tv/day?language=en-US&api_key=${KEY}`
+		);
+		setTrendingTv(data.results);
+	}
+
+	function getContent() {
+		setIsLoading(true);
+		getTrendingTv();
+		getTrendingMovies();
+		getPopularMovies();
+		getNowPlaying();
+		setIsLoading(false);
+	}
+
+	useEffect(() => {
+		getContent();
+	}, []);
+
 	return (
 		<>
-			<section id = 'home'>
+			<section id="home">
 				<div className="container">
 					<div className="row">
-						<div className="trending__container--movies">
-							<h3 className='white'>Trending Movies Today</h3>
-							<div className="movies">
-								{trendingMovies.slice(0, 5).map((movie) => (
-									<MovieCard
-										title={movie.title}
-										date={movie.release_date}
-										key={movie.id}
-										id={movie.id}
-										posterPath={movie.poster_path}
-									/>
-								))}
-							</div>
-						</div>
-						<div className="trending__container--movies">
-							<h3 className='white'>Popular Movies </h3>
-							<div className="movies">
-								{popularMovies.slice(0, 5).map((movie) => (
-									<MovieCard
-										title={movie.title}
-										date={movie.release_date}
-										key={movie.id}
-										id={movie.id}
-										posterPath={movie.poster_path}
-									/>
-								))}
-							</div>
-						</div>
-						<div className="trending__container--movies">
-							<h3 className='white'>Now Playing</h3>
-							<div className="movies">
-								{nowPlaying.slice(5, 10).map((movie) => (
-									<MovieCard
-										title={movie.title}
-										date={movie.release_date}
-										key={movie.id}
-										id={movie.id}
-										posterPath={movie.poster_path}
-									/>
-								))}
-							</div>
-						</div>
-						<div className="trending__container--tv-shows">
-							<h3 className='white'>Trending Tv Shows Today</h3>
-							<div className="movies">
-								{trendingTv.slice(0, 5).map((show) => (
-									<ShowCard
-										title={show.original_name}
-										date={show.release_date}
-										key={show.id}
-										id={show.id}
-										posterPath={show.poster_path}
-									/>
-								))}
-							</div>
-						</div>
-						<div className="trending__container">
-							
-						</div>
+						<MovieCarousel
+							movies={trendingMovies}
+							title={'Trending Movies'}
+						/>
+						<MovieCarousel
+							movies={popularMovies}
+							title={'Popular Movies'}
+						/>
+						<MovieCarousel
+							movies={nowPlaying}
+							title={'Now Playing In Theatres'}
+						/>
+						<TvCarousel
+							movies={trendingTv}
+							title={'Trending Tv Shows'}
+						/>
 					</div>
 				</div>
 			</section>

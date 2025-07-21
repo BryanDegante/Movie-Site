@@ -28,7 +28,7 @@ const MovieDetails = () => {
 					<div className="back__button--wrapper">
 						<button
 							className="back__button"
-							onClick={() => navigate(`/Movies`)}
+							onClick={() => navigate(-1)}
 						>
 							<IoMdArrowBack className="fa-arrow-left" />
 							Back
@@ -45,7 +45,7 @@ const MovieDetails = () => {
 										IMDB Rating
 									</span>
 									<FaStar className="fa-solid fa-star" />
-									<span className="blue">
+									<span className="yellow">
 										{Math.ceil(movie.vote_average).toFixed(
 											1
 										)}

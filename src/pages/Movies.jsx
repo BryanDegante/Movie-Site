@@ -1,65 +1,122 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
-import { GrFormPrevious } from 'react-icons/gr';
-import { MdNavigateNext } from 'react-icons/md';
-import { useNavigate, useParams } from 'react-router-dom';
+import { baseUrl, KEY } from '../constants';
+import axios from 'axios';
+import SearchBar from '../components/SearchBar';
+import PageRotation from '../components/PageRotation';
 
-const Movies = ({ movies, page, totalPages, resultsTotal, prevPage,nextPage }) => {
-	let navigate = useNavigate();
+const Movies = () => {
+	const [movies, setMovies] = useState([]);
+	const [resultsTotal, setResultsTotal] = useState(0);
+	const [title, setTitle] = useState('');
+	const [totalPages, setTotalPages] = useState();
+	const [page, setPage] = useState(1);
+	const [isLoading, setIsLoading] = useState();
 
-
-	function prevMoviePage() {
-		if (page !== 1) {
-			page = page - 1;
-			prevPage(page);
-		}
+	async function getMovies(title,page) {
+		setIsLoading(true)
+		const { data } = await axios.get(
+			`${baseUrl}search/movie?api_key=${KEY}&query=${title}&page=${page}`
+		);
+		setMovies(data.results);
+		setResultsTotal(data.total_results);
+		setTotalPages(data.total_pages);
+		setIsLoading(false)
 	}
 
-	function nextMoviePage() {
-		if (page !== totalPages) {
-			page = page + 1;
-			nextPage(page)
-		}
+	function search(elm) {
+		setTitle(elm);
+		setPage(1);
+		getMovies(title, page);
 	}
 
+	useEffect(() => {
+		getMovies(title, page);
+	}, [page, title]);
+
+	function pageChange(elm) {
+		setPage(elm);
+		getMovies(title, elm);
+	}
+
+	// IN CASE IT DOESNT WORK
+
+	// function prevMoviePage() {
+	// 	if (page !== 1) {
+	// 		setPage((prevPage) => prevPage - 1);
+	// 	}
+	// }
+
+	// function nextMoviePage() {
+	// 	if (page !== totalPages) {
+	// 		setPage((prevPage) => prevPage + 1);
+	// 	}
+	// }
 
 	return (
-		<section id="movies__main">
-			<div className="container">
-				<div className="row">
-					<div className="results">
-						<p>
-							Results Found: "
-							<span id="results__number">{resultsTotal}</span>"
-						</p>
-					</div>
-					<div className="movies">
-						{movies.map((movie) => (
-							<MovieCard
-								title={movie.title}
-								date={movie.release_date}
-								key={movie.id}
-								id={movie.id}
-								posterPath={movie.poster_path}
+		<>
+			<section id="movies__main">
+				<div className="container ">
+					<div className="row ">
+						<SearchBar search={search} type={'movie'} />
+						<img
+							src="/film.png"
+							alt=""
+							className="film-one"
+						/>
+						{title === '' && (
+							<div className="default__wrapper">
+								<h4 className="no-title">Discover Your Next Movie</h4>
+							</div>
+						)}
+						<img
+							src="/film.png"
+							alt=""
+							className="film-two"
+						/>
+						{title !== '' && (
+							<div className="results">
+								<p>
+									Results Found: "
+									<span id="results__number">
+										{resultsTotal}
+									</span>
+									"
+								</p>
+							</div>
+						)}
+						<div className="movies">
+							{isLoading ? (
+								<div className="movie__skeleton">
+									<div className="skeleton__body skeleton1"></div>
+									<div className="skeleton__body skeleton2"></div>
+									<div className="skeleton__body skeleton3"></div>
+									<div className="skeleton__body skeleton4"></div>
+								</div>
+							) : (
+								movies.map((movie) => (
+									<MovieCard
+										card = {'movie__stack'}
+										title={movie.title}
+										date={movie.release_date}
+										key={movie.id}
+										id={movie.id}
+										posterPath={movie.poster_path}
+									/>
+								))
+							)}
+						</div>
+						{title !== '' && (
+							<PageRotation
+								pageChange={pageChange}
+								totalPages={totalPages}
+								pageNum={page}
 							/>
-						))}
-					</div>
-					<div className="page__list">
-						<GrFormPrevious
-							className="page__button"
-							onClick={prevMoviePage}
-						/>
-						<p className="total-pages">
-							{page} of {totalPages}
-						</p>
-						<MdNavigateNext
-							className="page__button"
-							onClick={nextMoviePage}
-						/>
+						)}
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</>
 	);
 };
 

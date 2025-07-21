@@ -2,35 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-const SearchBar = ({ searchMovies }) => {
+const SearchBar = ({ search, type }) => {
 	const [searchString, setSearchString] = useState('');
 	let navigate = useNavigate();
 
-
-	function searchForMovies() {
-		searchMovies(searchString)
+	function searchTitle() {
+		search(searchString);
 	}
 
-
-
-	
-
 	return (
-		<div class="searchbar__container">
-			<div class="search__wrapper">
+		<div className="searchbar__container">
+			<div className="search__wrapper">
 				<input
 					type="search"
-					class="search__bar"
+					className="search__bar"
 					onChange={(event) => setSearchString(event.target.value)}
 					onKeyDown={(event) => {
-						if (event.key === "Enter") {
-							searchForMovies(event.target.value)
-							navigate(`/Movies`)
+						if (event.key === 'Enter' && type ==='movie') {
+							searchTitle(event.target.value);
+							navigate(`/Movies`);
+						}
+						if (event.key === 'Enter' && type === 'show') {
+							searchTitle(event.target.value);
+							navigate(`/TvShows`);
 						}
 					}}
-					placeholder="Search for a movie"
+					placeholder="Search"
 				/>
-				<div class="icon__wrapper" onClick={() => searchForMovies()}>
+				<div className="icon__wrapper" onClick={() => searchTitle()}>
 					<FaSearch />
 				</div>
 			</div>

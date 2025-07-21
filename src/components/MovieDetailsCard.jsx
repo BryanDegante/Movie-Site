@@ -5,7 +5,6 @@ import Backdrop from "./ui/Backdrop";
 const MovieDetailsCard = ({ movie }) => {
   const genres = movie.genres || [];
 
-  console.log(movie)
   return (
 		<>
 			<div className="movie__wrapper">
@@ -18,32 +17,32 @@ const MovieDetailsCard = ({ movie }) => {
 				<div className="movie__description--text">
 					<div className="movie__realease">
 						<span className="sub-heading white bold">Released</span>
-						<span className="blue">{movie.release_date}</span>
+						<span className="yellow">{movie.release_date}</span>
 					</div>
 					<div className="movie__runtime">
 						<span className="sub-heading white bold">Runtime</span>
-						<span className="blue">{movie.runtime} min</span>
+						<span className="yellow">{movie.runtime} min</span>
 					</div>
 					<div className="movie__Age-rating">
 						<span className="sub-heading white bold">Language</span>
-						<span className="blue">{movie.original_language}</span>
+						<span className="yellow">{movie.original_language}</span>
 					</div>
 					<div className="movie__Director">
 						<span className="sub-heading white bold">Director</span>
-						<span className="blue">${movie.Director}</span>
+						<span className="yellow">${movie.Director}</span>
 					</div>
 					<div className="movie__writer">
 						<span className="sub-heading white bold">Writer</span>
-						<span className="blue">${movie.Writer}</span>
+						<span className="yellow">${movie.Writer}</span>
 					</div>
 					<div className="movie__actors">
 						<span className="sub-heading white bold">Actors</span>
-						<span className="blue">${movie.Actors}</span>
+						<span className="yellow">${movie.Actors}</span>
 					</div>
 					<div className="movie__genre">
 						<span className="sub-heading white bold">Genre</span>
 						{genres.map((g) => (
-							<span className="blue" key={g.id}>
+							<span className="yellow" key={g.id}>
 								
 								| {g.name} |
 							</span>
