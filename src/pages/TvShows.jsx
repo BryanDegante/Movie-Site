@@ -82,6 +82,7 @@ const [shows,setShows] = useState([]);
 										key={show.id}
 										id={show.id}
 										posterPath={show.poster_path}
+										card={'show__stack'}
 									/>
 								))
 							)}

@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import MovieCard from '../components/MovieCard';
-import ShowCard from '../components/ShowCard';
 import axios from 'axios';
 import { baseUrl, KEY } from '../constants';
 import MovieCarousel from '../components/MovieCarousel';
-import TvCarousel from '../components/TvCarousel copy';
-const MOVIES_PER_SLIDE = 4;
+import TvCarousel from '../components/TvCarousel';
 
 const Home = () => {
 	const [trendingMovies, setTrendingMovies] = useState([]);

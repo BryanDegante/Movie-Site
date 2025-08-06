@@ -2,12 +2,12 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Poster from './ui/poster';
 
-const ShowCard = ({ title, date, id, posterPath }) => {
+const ShowCard = ({ title, date, id, posterPath,card }) => {
 	let navigate = useNavigate();
 
 	return (
 		<div
-			className="show"
+			className={card}
 			onClick={() => navigate(`/ShowDetails/${id}`)}
 			key={id}
 		>

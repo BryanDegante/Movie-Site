@@ -1,6 +1,5 @@
 import React from "react"
 import Poster from "./ui/poster";
-import Backdrop from "./ui/Backdrop";
 
 const MovieDetailsCard = ({ movie }) => {
   const genres = movie.genres || [];
@@ -26,18 +25,6 @@ const MovieDetailsCard = ({ movie }) => {
 					<div className="movie__Age-rating">
 						<span className="sub-heading white bold">Language</span>
 						<span className="yellow">{movie.original_language}</span>
-					</div>
-					<div className="movie__Director">
-						<span className="sub-heading white bold">Director</span>
-						<span className="yellow">${movie.Director}</span>
-					</div>
-					<div className="movie__writer">
-						<span className="sub-heading white bold">Writer</span>
-						<span className="yellow">${movie.Writer}</span>
-					</div>
-					<div className="movie__actors">
-						<span className="sub-heading white bold">Actors</span>
-						<span className="yellow">${movie.Actors}</span>
 					</div>
 					<div className="movie__genre">
 						<span className="sub-heading white bold">Genre</span>

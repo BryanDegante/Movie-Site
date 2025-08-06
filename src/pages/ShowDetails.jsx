@@ -56,12 +56,7 @@ const ShowDetails = () => {
 						</div>
 						<ShowDetailsCard show={show} />
 					</div>
-					<Backdrop
-						backPath={show.backdrop_path}
-						className={''}
-                        figureClass={'backdrop'}
-                        tagline={show.tagline}
-					/>
+					
 				</div>
 			</div>
 		</section>

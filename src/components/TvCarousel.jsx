@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MovieCard from './MovieCard';
+import ShowCard from './ShowCard';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 import { GrFormPrevious } from 'react-icons/gr';
 import { MdNavigateNext } from 'react-icons/md';
@@ -28,12 +28,12 @@ const TvCarousel = ({ movies, title }) => {
 				<div className="carousel__track">
 					{visibleMovies.map((movie, i) => (
 						<div className="slide" key={movie.id}>
-							<MovieCard
+							<ShowCard
 								title={movie.original_name}
 								date={movie.release_date}
 								id={movie.id}
 								posterPath={movie.backdrop_path}
-								card={'movie'}
+								card={'show'}
 							/>
 						</div>
 					))}

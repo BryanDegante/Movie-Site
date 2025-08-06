@@ -1,25 +1,61 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { baseUrl, KEY } from '../constants';
-import Poster from '../components/ui/poster';
-import { IoMdArrowBack } from 'react-icons/io';
+import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import MovieDetailsCard from '../components/MovieDetailsCard';
 import { FaStar } from 'react-icons/fa';
-import Backdrop from '../components/ui/Backdrop';
+import YouTube from 'react-youtube';
 
 const MovieDetails = () => {
 	const { id } = useParams();
 	const [movie, setMovie] = useState({});
+	const [videos, setVideos] = useState({});
+	const [videoKey, setVideoKey] = useState();
+	const [filterOpen, setFilterOpen] = useState(false);
+
 	let navigate = useNavigate();
-	async function getDetails() {
-		const results = await axios.get(`${baseUrl}movie/${id}?api_key=${KEY}`);
-		setMovie(results.data);
-	}
 
 	useEffect(() => {
+		if (filterOpen) {
+			document.body.classList.add('filter--open');
+		} else {
+			document.body.classList.remove('filter--open');
+		}
+	}, [filterOpen]);
+
+	const videoOptions = {
+		playerVars: {
+			autoplay: 1,
+			rel: 0,
+			showinfo: 0,
+			loop: 1,
+		},
+	};
+
+	useEffect(() => {
+		async function getDetails() {
+			const results = await axios.get(
+				`${baseUrl}movie/${id}?api_key=${KEY}`
+			);
+			setMovie(results.data);
+		}
+		async function getVideos() {
+			const { data } = await axios.get(
+				`${baseUrl}movie/${id}/videos?api_key=${KEY}`
+			);
+			setVideos(data.results);
+
+			for (let i = 0; i < videos.length; i++) {
+				if (videos[i].type === 'Trailer') {
+					return setVideoKey(`${videos[i].key}`);
+				}
+			}
+		}
+
 		getDetails();
-	}, [JSON.stringify(movie), id]);
+		getVideos();
+	}, [id,videos]);
 
 	return (
 		<section id="movie__info">
@@ -55,11 +91,30 @@ const MovieDetails = () => {
 						</div>
 						<MovieDetailsCard movie={movie} />
 					</div>
-					<Backdrop
-						backPath={movie.backdrop_path}
-						className={''}
-						figureClass={'backdrop'}
-					/>
+					{filterOpen && (
+						<div className="filter__backdrop ">
+							<button
+								className="filter__menu--close"
+								onClick={() => setFilterOpen(false)}
+							>
+								<IoMdClose className="fas fa-times" />
+							</button>
+
+							<YouTube
+								className="clip"
+								videoId={videoKey}
+								opts={videoOptions}
+							/>
+						</div>
+					)}
+					<div className="trailer__wrapper">
+						<button
+							className="trailer--button"
+							onClick={() => setFilterOpen(true)}
+						>
+							Watch Trailer
+						</button>
+					</div>
 				</div>
 			</div>
 		</section>

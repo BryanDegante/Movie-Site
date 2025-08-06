@@ -1,9 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,  Link } from 'react-router-dom';
 import Movies from './pages/Movies';
 import Nav from './components/Nav';
 import MovieDetails from './pages/MovieDetails';
 import Footer from './components/Footer';
-import SearchBar from './components/SearchBar';
 import  {  useEffect, useState } from 'react';
 import Home from './pages/Home';
 import TvShows from './pages/TvShows';
@@ -12,7 +11,6 @@ import { IoMdClose } from 'react-icons/io';
 
 function App() {
   const [filterOpen, setFilterOpen] = useState(false);
-  const [filterType, setFilterType] = useState('');
 
   // Prevent scrolling when filter is open
   useEffect(() => {

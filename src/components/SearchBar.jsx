@@ -19,11 +19,11 @@ const SearchBar = ({ search, type }) => {
 					onChange={(event) => setSearchString(event.target.value)}
 					onKeyDown={(event) => {
 						if (event.key === 'Enter' && type ==='movie') {
-							searchTitle(event.target.value);
+							searchTitle();
 							navigate(`/Movies`);
 						}
 						if (event.key === 'Enter' && type === 'show') {
-							searchTitle(event.target.value);
+							searchTitle();
 							navigate(`/TvShows`);
 						}
 					}}

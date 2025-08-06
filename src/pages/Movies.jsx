@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 import { baseUrl, KEY } from '../constants';
 import axios from 'axios';
@@ -13,15 +13,15 @@ const Movies = () => {
 	const [page, setPage] = useState(1);
 	const [isLoading, setIsLoading] = useState();
 
-	async function getMovies(title,page) {
-		setIsLoading(true)
+	async function getMovies(title, page) {
+		setIsLoading(true);
 		const { data } = await axios.get(
 			`${baseUrl}search/movie?api_key=${KEY}&query=${title}&page=${page}`
 		);
 		setMovies(data.results);
 		setResultsTotal(data.total_results);
 		setTotalPages(data.total_pages);
-		setIsLoading(false)
+		setIsLoading(false);
 	}
 
 	function search(elm) {
@@ -59,21 +59,16 @@ const Movies = () => {
 				<div className="container ">
 					<div className="row ">
 						<SearchBar search={search} type={'movie'} />
-						<img
-							src="/film.png"
-							alt=""
-							className="film-one"
-						/>
+
+						<img src="/film.png" alt="" className="film-one" />
 						{title === '' && (
 							<div className="default__wrapper">
-								<h4 className="no-title">Discover Your Next Movie</h4>
+								<h4 className="no-title">
+									Discover Your Next Movie
+								</h4>
 							</div>
 						)}
-						<img
-							src="/film.png"
-							alt=""
-							className="film-two"
-						/>
+						<img src="/film.png" alt="" className="film-two" />
 						{title !== '' && (
 							<div className="results">
 								<p>
@@ -83,6 +78,22 @@ const Movies = () => {
 									</span>
 									"
 								</p>
+								<select
+									id="filter"
+									defaultValue="DEFAULT"
+									
+								>
+									<option value="DEFAULT" disabled>
+										Sort
+									</option>
+									<option value="LOW_TO_HIGH">
+										Price, Low to High
+									</option>
+									<option value="HIGH_TO_LOW">
+										Price, High to Low
+									</option>
+									<option value="RATING">Rating</option>
+								</select>
 							</div>
 						)}
 						<div className="movies">
@@ -96,7 +107,7 @@ const Movies = () => {
 							) : (
 								movies.map((movie) => (
 									<MovieCard
-										card = {'movie__stack'}
+										card={'movie__stack'}
 										title={movie.title}
 										date={movie.release_date}
 										key={movie.id}
