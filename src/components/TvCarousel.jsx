@@ -1,24 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ShowCard from './ShowCard';
-import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 import { GrFormPrevious } from 'react-icons/gr';
 import { MdNavigateNext } from 'react-icons/md';
-const MOVIES_PER_SLIDE = 4;
 
-const TvCarousel = ({ movies, title }) => {
+const getShowsPerSlide = () => { 
+	if (window.innerWidth < 600) return 2;
+	if (window.innerWidth < 1024) return 3;
+	return 4;
+}
+
+const TvCarousel = ({ shows, title }) => {
 	const [slideIndex, setSlideIndex] = useState(0);
-	const totalSlides = Math.ceil(movies.length / MOVIES_PER_SLIDE);
-	const goToSlide = (idx) => setSlideIndex(idx);
-	const nextSlide = () => setSlideIndex((prev) => (prev + 1) % totalSlides);
-	const prevSlide = () =>
-		setSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-
-	const start = slideIndex * MOVIES_PER_SLIDE;
-	const end = start + MOVIES_PER_SLIDE;
-	const visibleMovies = movies.slice(start, end);
+		const [showsPerSlide, setShowsPerSlide] = useState(getShowsPerSlide());
+	
+		useEffect(() => {
+			const handleResize = () => setShowsPerSlide(getShowsPerSlide());
+			window.addEventListener('resize', handleResize);
+			return () => window.removeEventListener('resize', handleResize);
+		}, []);
+	
+		const totalSlides = Math.ceil(shows.length / showsPerSlide);
+		const goToSlide = (idx) => setSlideIndex(idx);
+		const nextSlide = () => setSlideIndex((prev) => (prev + 1) % totalSlides);
+		const prevSlide = () =>
+			setSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+	
+		const start = slideIndex * showsPerSlide;
+		const end = start + showsPerSlide;
+		const visibleShows = shows.slice(start, end);
+		const slideWidth = `${100 / showsPerSlide}%`;
 
 	return (
-		<div className="carousel__container--movies">
+		<div className="carousel__container">
 			<h3 className="white">{title}</h3>
 			<div className="carousel">
 				<GrFormPrevious
@@ -26,8 +39,15 @@ const TvCarousel = ({ movies, title }) => {
 					onClick={prevSlide}
 				></GrFormPrevious>
 				<div className="carousel__track">
-					{visibleMovies.map((movie, i) => (
-						<div className="slide" key={movie.id}>
+					{visibleShows.map((movie, i) => (
+						<div
+							className="slide"
+							key={movie.id}
+							style={{
+								flex: `0 0 ${slideWidth}`,
+								maxWidth: slideWidth,
+							}}
+						>
 							<ShowCard
 								title={movie.original_name}
 								date={movie.release_date}

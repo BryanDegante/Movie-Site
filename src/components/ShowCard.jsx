@@ -13,7 +13,7 @@ const ShowCard = ({ title, date, id, posterPath,card }) => {
 		>
 			<Poster path={posterPath} className={'show__list--poster'} />
 			<div className="show__description">
-				<h3 className=" white">{title}</h3>
+				<h3 className="white">{title}</h3>
 				<p className="white">{(date || []).slice(0, 4)} </p>
 			</div>
 		</div>

@@ -9,7 +9,6 @@ const Home = () => {
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [nowPlaying, setNowPlaying] = useState([]);
 	const [trendingTv, setTrendingTv] = useState([]);
-	const [isLoading, setIsLoading] = useState();
 
 	async function getTrendingMovies() {
 		const { data } = await axios.get(
@@ -39,12 +38,10 @@ const Home = () => {
 	}
 
 	function getContent() {
-		setIsLoading(true);
 		getTrendingTv();
 		getTrendingMovies();
 		getPopularMovies();
 		getNowPlaying();
-		setIsLoading(false);
 	}
 
 	useEffect(() => {
@@ -69,7 +66,7 @@ const Home = () => {
 							title={'Now Playing In Theatres'}
 						/>
 						<TvCarousel
-							movies={trendingTv}
+							shows={trendingTv}
 							title={'Trending Tv Shows'}
 						/>
 					</div>
