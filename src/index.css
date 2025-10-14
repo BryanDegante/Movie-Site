@@ -98,13 +98,27 @@ ul {
 }
 
 /*    LANDING PAGE  */
+.container_outer {
+    position: fixed;
+    left: 0;
+    right: 0px;
+    top: 8px;
+    height: 64px;
+    border: none;
+    transition: all ease 700ms;
+    z-index: 50;
+}
 
+.floating-nav {
+    background-color: #242424;
+    z-index: 100;
+}
 
 nav {
-    height: 100px;
     display: flex;
-    background-color: #242424;
-    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .nav__container {
@@ -147,6 +161,23 @@ nav {
     transition: all 300ms ease;
 }
 
+.grid_container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+
+}
+
+.boxNum {
+    font-size: 12px;
+}
+
+.box {
+    height: 50px;
+    width: 50px;
+    background-color: rgba(255, 251, 8, 0.527);
+}
+
 .filter__backdrop {
     position: fixed;
     top: 0;
@@ -154,10 +185,7 @@ nav {
     right: 0;
     bottom: 0;
     z-index: 9999;
-    /* Make sure this is higher than nav, search bar, etc. */
-    background-color: rgba(36, 36, 36, 0.98);
-    /* or your preferred color */
-    display: flex;
+    
     justify-content: center;
     align-items: center;
     transition: all 300ms ease;
@@ -236,8 +264,12 @@ nav {
 }
 
 header {
-    margin-top: 16px;
-    height: calc(100vh / 3);
+    top: 50%;
+    transform: translateY(-50%);
+    height: 64px;
+    background-color: #24242467;
+    position: absolute;
+    width: 100%;
 }
 
 .landing__text {
@@ -895,8 +927,10 @@ footer {
 
 @media(min-height: 1280px) {
     .movie {
-        width: 100%;;
+        width: 100%;
+        ;
     }
+
     .movie__wrapper {
         flex-direction: column;
         align-items: center;
@@ -937,7 +971,8 @@ footer {
 
 @media(max-width: 768px) {
 
-    .movie__stack,.show__stack{
+    .movie__stack,
+    .show__stack {
         width: calc(100%/4);
     }
 
@@ -953,7 +988,8 @@ footer {
         padding: 8px 42px;
     }
 
-    .movie__description, .show__description {
+    .movie__description,
+    .show__description {
         font-size: 12px;
         padding: 0px 8px;
     }
@@ -1000,10 +1036,12 @@ footer {
 
 @media(max-width: 550px) {
 
-    .movie__stack,.show__stack{
+    .movie__stack,
+    .show__stack {
         width: calc(100%/3);
     }
-    .page__button{
+
+    .page__button {
         color: #0004f8;
     }
 

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { baseUrl, KEY } from '../constants';
 import MovieCarousel from '../components/MovieCarousel';
 import TvCarousel from '../components/TvCarousel';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const Home = () => {
 	const [trendingMovies, setTrendingMovies] = useState([]);

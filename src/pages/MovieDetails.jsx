@@ -6,6 +6,10 @@ import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import MovieDetailsCard from '../components/MovieDetailsCard';
 import { FaStar } from 'react-icons/fa';
 import YouTube from 'react-youtube';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { PiWindowsLogo } from 'react-icons/pi';
+import { TiKey } from 'react-icons/ti';
 
 const MovieDetails = () => {
 	const { id } = useParams();
@@ -13,9 +17,19 @@ const MovieDetails = () => {
 	const [videos, setVideos] = useState({});
 	const [videoKey, setVideoKey] = useState();
 	const [filterOpen, setFilterOpen] = useState(false);
+	const windowLength = window.innerWidth;
+	const windowHeight = window.innerHeight;
+	const cols = Math.ceil(windowLength / 50);
+	const rows = Math.ceil(windowHeight / 50);
+	let boxArray = new Array(cols * rows).fill(0);
+	const boxStyles = {
+		gridTemplateColumns: `repeat(${cols}, 50px)`,
+		gridTemplateRows: `repeat(${rows}, 50px)`,
+	};
 
+	
 	let navigate = useNavigate();
-
+	
 	useEffect(() => {
 		if (filterOpen) {
 			document.body.classList.add('filter--open');
@@ -27,6 +41,7 @@ const MovieDetails = () => {
 	const videoOptions = {
 		playerVars: {
 			autoplay: 1,
+			controls: 0,
 			rel: 0,
 			showinfo: 0,
 			loop: 1,
@@ -55,7 +70,28 @@ const MovieDetails = () => {
 
 		getDetails();
 		getVideos();
-	}, [id,videos]);
+	}, [id, videos]);
+
+	const timeLine = gsap.timeline();
+
+
+	useGSAP(() => {
+		
+		timeLine.fromTo('.box', {
+			scale: 0,
+		},{
+			scale: 1,
+			rotate: 360,
+			stagger: {
+				amount: 2,
+				ease: 'power1.in',
+				grid: [rows,cols],
+				from: 'center',
+			},
+		});
+		
+	}, [filterOpen]);
+	
 
 	return (
 		<section id="movie__info">
@@ -93,6 +129,17 @@ const MovieDetails = () => {
 					</div>
 					{filterOpen && (
 						<div className="filter__backdrop ">
+							<div
+								className="grid_container"
+								style={boxStyles}
+							>
+								{
+									boxArray.map((e,index) => (
+										<div className='box' key={index}>
+										</div>
+									))
+								}
+							</div>
 							<button
 								className="filter__menu--close"
 								onClick={() => setFilterOpen(false)}
