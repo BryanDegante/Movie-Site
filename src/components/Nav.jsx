@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { IoMdClose } from 'react-icons/io';
+import { Link} from 'react-router-dom';
 import gsap from 'gsap';
 import {useWindowScroll} from 'react-use'
 const Nav = ({ openMenu }) => {
@@ -12,7 +11,7 @@ const Nav = ({ openMenu }) => {
 
 
 	useEffect(() => {
-		if (currentScrollY == 0) {
+		if (currentScrollY === 0) {
 			setIsNavVisible(true);
 			navContainerRef.current.classList.remove('floating-nav');
 		} else if (currentScrollY > lastScrollY) {

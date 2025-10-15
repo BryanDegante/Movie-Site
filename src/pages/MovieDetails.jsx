@@ -8,15 +8,13 @@ import { FaStar } from 'react-icons/fa';
 import YouTube from 'react-youtube';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { PiWindowsLogo } from 'react-icons/pi';
-import { TiKey } from 'react-icons/ti';
 
 const MovieDetails = () => {
 	const { id } = useParams();
 	const [movie, setMovie] = useState({});
-	const [videos, setVideos] = useState({});
 	const [videoKey, setVideoKey] = useState();
 	const [filterOpen, setFilterOpen] = useState(false);
+	const [filterClose, setFilterClose] = useState(false);
 	const windowLength = window.innerWidth;
 	const windowHeight = window.innerHeight;
 	const cols = Math.ceil(windowLength / 50);
@@ -27,17 +25,8 @@ const MovieDetails = () => {
 		gridTemplateRows: `repeat(${rows}, 50px)`,
 	};
 
-	
 	let navigate = useNavigate();
 	
-	useEffect(() => {
-		if (filterOpen) {
-			document.body.classList.add('filter--open');
-		} else {
-			document.body.classList.remove('filter--open');
-		}
-	}, [filterOpen]);
-
 	const videoOptions = {
 		playerVars: {
 			autoplay: 1,
@@ -47,7 +36,7 @@ const MovieDetails = () => {
 			loop: 1,
 		},
 	};
-
+	
 	useEffect(() => {
 		async function getDetails() {
 			const results = await axios.get(
@@ -59,42 +48,95 @@ const MovieDetails = () => {
 			const { data } = await axios.get(
 				`${baseUrl}movie/${id}/videos?api_key=${KEY}`
 			);
-			setVideos(data.results);
-
-			for (let i = 0; i < videos.length; i++) {
-				if (videos[i].type === 'Trailer') {
-					return setVideoKey(`${videos[i].key}`);
-				}
+			
+			const trailer = data.results.find(
+				(video) => video.type === 'Trailer'
+			);
+			if (trailer) {
+				setVideoKey(trailer.key);
 			}
 		}
-
 		getDetails();
 		getVideos();
-	}, [id, videos]);
-
+	}, [id]);
+	
+	
 	const timeLine = gsap.timeline();
 
-
 	useGSAP(() => {
-		
-		timeLine.fromTo('.box', {
-			scale: 0,
-		},{
-			scale: 1,
-			rotate: 360,
-			stagger: {
-				amount: 2,
-				ease: 'power1.in',
-				grid: [rows,cols],
-				from: 'center',
-			},
-		});
-		
-	}, [filterOpen]);
+		if (filterOpen && !filterClose) {
+			document.body.classList.add('filter--open');
+			timeLine.clear(); 
+			 timeLine
+					.set('.box', { scale: 0, rotation: 0, opacity: 0 })
+					.fromTo(
+						'.box',
+						{
+							scale: 0,
+							opacity: 0,
+						},
+						{
+							scale: 1,
+							opacity: 1,
+							rotate: 180,
+							duration: 1.5,
+							stagger: {
+								amount: 1.5,
+								ease: 'power2.inOut',
+								grid: [rows, cols],
+								from: 'edges',
+							},
+						}
+					);
+		}
+		if (filterClose && !filterOpen) {
+			timeLine.clear(); 
+			 timeLine.fromTo(
+					'.box',
+					{
+						scale: 1,
+						opacity: 1,
+					},
+					{
+						scale: 0,
+						opacity: 0,
+						rotate: -180,
+						duration: 0.5,
+						stagger: {
+							amount: 1.5,
+							ease: 'power2.out',
+							grid: [rows, cols],
+							from: 'center',
+						},
+						onComplete: () => {
+							document.body.classList.remove('filter--open');
+							setFilterOpen(false);
+							setFilterClose(false);
+						},
+					}
+				);
+		}
+	}, [filterOpen, filterClose])
 	
-
+	useGSAP(() => {
+		timeLine.fromTo('#movieDetails', {
+			scale: 0,
+			opacity: 0,
+		}, {
+			scale: 1, 
+			opacity: 1,
+			duration: 2,
+			stagger: {
+				amount: 0.5,
+				from: 'start',
+				ease: 'back.inOut',
+			}
+		}
+		);
+	},[])
+	
 	return (
-		<section id="movie__info">
+		<section ir="movie__info">
 			<div className="container ">
 				<div className="row">
 					<div className="back__button--wrapper">
@@ -108,10 +150,16 @@ const MovieDetails = () => {
 					</div>
 					<div className="movie__description--single">
 						<div className="movie__description--header">
-							<h1 className="movie__title--single white">
+							<h1
+								id="movieDetails"
+								className="movie__title--single white"
+							>
 								{movie.original_title}
 							</h1>
-							<ul className="movie__ratings--list">
+							<ul
+								id="movieDetails"
+								className="movie__ratings--list"
+							>
 								<li className="movie__rating">
 									<span className="sub-heading white bold">
 										IMDB Rating
@@ -127,22 +175,19 @@ const MovieDetails = () => {
 						</div>
 						<MovieDetailsCard movie={movie} />
 					</div>
-					{filterOpen && (
+					{(filterOpen || filterClose) && (
 						<div className="filter__backdrop ">
-							<div
-								className="grid_container"
-								style={boxStyles}
-							>
-								{
-									boxArray.map((e,index) => (
-										<div className='box' key={index}>
-										</div>
-									))
-								}
+							<div className="grid_container" style={boxStyles}>
+								{boxArray.map((e, index) => (
+									<div className="box" key={index}></div>
+								))}
 							</div>
 							<button
 								className="filter__menu--close"
-								onClick={() => setFilterOpen(false)}
+								onClick={() => {
+									setFilterClose(true);
+									setFilterOpen(false);
+								}}
 							>
 								<IoMdClose className="fas fa-times" />
 							</button>
@@ -151,14 +196,14 @@ const MovieDetails = () => {
 								className="clip"
 								videoId={videoKey}
 								opts={videoOptions}
-							/>
+								/>
 						</div>
 					)}
-					<div className="trailer__wrapper">
+					<div id='movieDetails' className="trailer__wrapper">
 						<button
 							className="trailer--button"
 							onClick={() => setFilterOpen(true)}
-						>
+							>
 							Watch Trailer
 						</button>
 					</div>

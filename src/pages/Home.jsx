@@ -3,8 +3,6 @@ import axios from 'axios';
 import { baseUrl, KEY } from '../constants';
 import MovieCarousel from '../components/MovieCarousel';
 import TvCarousel from '../components/TvCarousel';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 
 const Home = () => {
 	const [trendingMovies, setTrendingMovies] = useState([]);
@@ -12,42 +10,38 @@ const Home = () => {
 	const [nowPlaying, setNowPlaying] = useState([]);
 	const [trendingTv, setTrendingTv] = useState([]);
 
-	async function getTrendingMovies() {
-		const { data } = await axios.get(
-			`${baseUrl}trending/movie/day?language=en-US&api_key=${KEY}`
-		);
+	useEffect(() => {
+		async function getTrendingMovies() {
+			const { data } = await axios.get(
+				`${baseUrl}trending/movie/day?language=en-US&api_key=${KEY}`
+			);
 
-		setTrendingMovies(data.results);
-	}
+			setTrendingMovies(data.results);
+		}
 
-	async function getPopularMovies() {
-		const { data } = await axios.get(
-			`${baseUrl}movie/popular?api_key=${KEY}`
-		);
-		setPopularMovies(data.results);
-	}
-	async function getNowPlaying() {
-		const { data } = await axios.get(
-			`${baseUrl}movie/now_playing?api_key=${KEY}`
-		);
-		setNowPlaying(data.results);
-	}
-	async function getTrendingTv() {
-		const { data } = await axios.get(
-			`${baseUrl}trending/tv/day?language=en-US&api_key=${KEY}`
-		);
-		setTrendingTv(data.results);
-	}
+		async function getPopularMovies() {
+			const { data } = await axios.get(
+				`${baseUrl}movie/popular?api_key=${KEY}`
+			);
+			setPopularMovies(data.results);
+		}
+		async function getNowPlaying() {
+			const { data } = await axios.get(
+				`${baseUrl}movie/now_playing?api_key=${KEY}`
+			);
+			setNowPlaying(data.results);
+		}
+		async function getTrendingTv() {
+			const { data } = await axios.get(
+				`${baseUrl}trending/tv/day?language=en-US&api_key=${KEY}`
+			);
+			setTrendingTv(data.results);
+		}
 
-	function getContent() {
 		getTrendingTv();
 		getTrendingMovies();
 		getPopularMovies();
 		getNowPlaying();
-	}
-
-	useEffect(() => {
-		getContent();
 	}, []);
 
 	return (
