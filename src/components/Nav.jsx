@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
-import {useWindowScroll} from 'react-use'
+import { useWindowScroll } from 'react-use';
 const Nav = ({ openMenu }) => {
-
 	const navContainerRef = useRef(null);
 	const [lastScrollY, setLastScrollY] = useState(0);
 	const [isNavVisible, setIsNavVisible] = useState(true);
 	const { y: currentScrollY } = useWindowScroll();
-
 
 	useEffect(() => {
 		if (currentScrollY === 0) {
@@ -22,7 +20,7 @@ const Nav = ({ openMenu }) => {
 			navContainerRef.current.classList.add('floating-nav');
 		}
 		setLastScrollY(currentScrollY);
-	}, [currentScrollY, lastScrollY]);	
+	}, [currentScrollY, lastScrollY]);
 
 	useEffect(() => {
 		gsap.to(navContainerRef.current, {
@@ -33,20 +31,15 @@ const Nav = ({ openMenu }) => {
 	}, [isNavVisible]);
 
 	return (
-		<div
-			className='container_outer'
-			ref={navContainerRef}
-		>
-			<header>
-
-			<nav >
-				<div className="nav__container">
+		<div className="nav__container" ref={navContainerRef}>
+			<header className="nav-header">
+				<nav>
 					<Link to="/">
 						<img
 							src="/blinker-icon.4f9b2663.png"
 							className="logo"
 							alt=""
-							/>
+						/>
 					</Link>
 					<div className="link__list">
 						<ul>
@@ -54,7 +47,7 @@ const Nav = ({ openMenu }) => {
 								<a
 									href="/"
 									className="nav__link link__hover--effect"
-									>
+								>
 									Home
 								</a>
 							</li>
@@ -62,13 +55,12 @@ const Nav = ({ openMenu }) => {
 						<button
 							className="filter__menu filter__button"
 							onClick={openMenu}
-							>
+						>
 							Filter
 						</button>
 					</div>
-				</div>
-			</nav>
-							</header>
+				</nav>
+			</header>
 		</div>
 	);
 };

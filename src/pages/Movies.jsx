@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 import { baseUrl, KEY } from '../constants';
 import axios from 'axios';
@@ -52,7 +52,7 @@ const Movies = () => {
 	// 		setPage((prevPage) => prevPage + 1);
 	// 	}
 	// }
-
+	
 	return (
 		<>
 			<section id="movies__main">

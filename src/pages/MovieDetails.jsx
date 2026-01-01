@@ -28,6 +28,8 @@ const MovieDetails = () => {
 	let navigate = useNavigate();
 	
 	const videoOptions = {
+		playsinline: 1,
+		fs: 1,
 		playerVars: {
 			autoplay: 1,
 			controls: 0,

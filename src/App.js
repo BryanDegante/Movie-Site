@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route,  Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Movies from './pages/Movies';
 import Nav from './components/Nav';
 import MovieDetails from './pages/MovieDetails';
 import Footer from './components/Footer';
-import  {  useState } from 'react';
+import { useState } from 'react';
 import Home from './pages/Home';
 import TvShows from './pages/TvShows';
 import ShowDetails from './pages/ShowDetails';
@@ -25,59 +25,59 @@ function App() {
   };
   const timeLine = gsap.timeline();
 
-useGSAP(() => {
+  useGSAP(() => {
     if (filterOpen && !filterClose) {
       document.body.classList.add('filter--open');
-      timeLine.clear(); 
-       timeLine
-          .set('.box', { scale: 0, rotation: 0, opacity: 0 })
-          .fromTo(
-            '.box',
-            {
-              scale: 0,
-              opacity: 0,
-            },
-            {
-              scale: 1,
-              opacity: 1,
-              rotate: 180,
-              duration: 1,
-              stagger: {
-                amount: 0.4,
-                ease: 'power2.inOut',
-                grid: [rows, cols],
-                from: 'edges',
-              },
-            }
-          );
-    } else if (filterClose && !filterOpen) {
-      timeLine.clear(); 
-       timeLine.fromTo(
+      timeLine.clear();
+      timeLine
+        .set('.box', { scale: 0, rotation: 0, opacity: 0 })
+        .fromTo(
           '.box',
-          {
-            scale: 1,
-            opacity: 1,
-          },
           {
             scale: 0,
             opacity: 0,
-            rotate: -180,
-            duration: 0.5,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            rotate: 180,
+            duration: 1,
             stagger: {
-              amount: 0.2,
-              ease: 'power2.out',
+              amount: 0.4,
+              ease: 'power2.inOut',
               grid: [rows, cols],
-              from: 'center',
+              from: 'edges',
             },
-           
           }
-       ).then(() => {
-         document.body.classList.remove('filter--open');
-         setFilterOpen(false);
-         setFilterClose(false);
-       });
+        );
+    } else if (filterClose && !filterOpen) {
+      timeLine.clear();
+      timeLine.fromTo(
+        '.box',
+        {
+          scale: 1,
+          opacity: 1,
+        },
+        {
+          scale: 0,
+          opacity: 0,
+          rotate: -180,
+          duration: 0.5,
+          stagger: {
+            amount: 0.2,
+            ease: 'power2.out',
+            grid: [rows, cols],
+            from: 'center',
+          },
+
+        }
+      ).then(() => {
+        document.body.classList.remove('filter--open');
+        setFilterOpen(false);
+        setFilterClose(false);
+      });
     }
-  },[filterOpen,filterClose])
+  }, [filterOpen, filterClose])
 
 
   return (
@@ -91,32 +91,34 @@ useGSAP(() => {
                 <div className="box" key={index}></div>
               ))}
             </div>
-            <button className="filter__menu--close" onClick={() => { setFilterClose(true); setFilterOpen(false) }}>
-              <IoMdClose className="fas fa-times" />
-            </button>
-            <div className="filter__choices">
-              <h1 className="filter__choice--text">
-                Filter your recently searched by:
-              </h1>
-              <Link to="/Movies">
-                <button className="filter__choice--button" onClick={() => { setFilterClose(true); setFilterOpen(false) }}>
-                Movie
+            <div className='menu__inner'>
+              <button className="filter__menu--close" onClick={() => { setFilterClose(true); setFilterOpen(false) }}>
+                <IoMdClose className="fas fa-times" />
               </button>
-              </Link>
-              <Link to="/TvShows">
-                <button className="filter__choice--button" onClick={() => { setFilterClose(true); setFilterOpen(false) }}> 
-                TV Show
-              </button>
-              </Link>
-              
+              <div className="filter__choices">
+                <h1 className="filter__choice--text">
+                  Filter your recently searched by:
+                </h1>
+                <Link to="/Movies">
+                  <button className="filter__choice--button" onClick={() => { setFilterClose(true); setFilterOpen(false) }}>
+                    Movie
+                  </button>
+                </Link>
+                <Link to="/TvShows">
+                  <button className="filter__choice--button" onClick={() => { setFilterClose(true); setFilterOpen(false) }}>
+                    TV Show
+                  </button>
+                </Link>
+              </div>
+
             </div>
           </div>
         )}
-       
+
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path="/Movies" element={<Movies/>}></Route>
-          <Route path="/TvShows" element={<TvShows  />}></Route>
+          <Route path="/Movies" element={<Movies />}></Route>
+          <Route path="/TvShows" element={<TvShows />}></Route>
           <Route path="/MovieDetails/:id" element={<MovieDetails />}></Route>
           <Route path="/ShowDetails/:id" element={<ShowDetails />}></Route>
         </Routes>

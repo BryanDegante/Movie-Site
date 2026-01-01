@@ -107,25 +107,37 @@ ul {
 }
 
 .floating-nav {
-    background-color: #242424;
+    background-color: rgba(0, 0, 0, 0.815);
     z-index: 100;
+    border-radius: 20px;
 }
 
 nav {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
+    padding: 8px;
+    color: white;
+}
+
+.nav-header {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
 }
 
 .nav__container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    margin: 0 auto;
+    position: fixed;
+    z-index: 50;
+    border: none;
+    left: 24px;
+    right: 24px;
+    height: 64px;
+    top: 16px;
+    transition: all ease 700ms;
 }
 
 .logo {
@@ -147,6 +159,21 @@ nav {
 .filter__menu {
     color: #000;
     background-color: #FFD700;
+}
+
+.menu__inner{
+background-color: #234061;
+position: fixed;
+    left: 50%;
+    top: 50%;
+    padding: 48px 32px;
+    transform: translate(-50%, -50%);
+        border-radius: 12px;
+        max-width: 560px;
+        width: 90%;
+        z-index: 9999;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
 }
 
 .filter__button {
@@ -177,20 +204,17 @@ nav {
 
 .filter__backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
     visibility: hidden;
     opacity: 0;
+    transition: opacity 200ms ease, visibility 200ms ease;
 }
 
 .filter--open {
-    height: 100vh;
     overflow-y: hidden;
 }
 
@@ -213,20 +237,19 @@ nav {
     transition: all 300ms ease;
 }
 
-.filter__menu--close:hover{
+.filter__menu--close:hover {
     color: #fff;
 }
 
 .filter__button:hover {
     background-color: #ffffff;
-     transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .filter__choices {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
 }
 
 .filter__choice--text {
@@ -248,21 +271,14 @@ nav {
     transition: all 300ms ease;
 }
 
-.filter__choice--button:hover{
-   background-color: #fff;
-   border: 3px solid #000;
+.filter__choice--button:hover {
+    background-color: #fff;
+    border: 3px solid #000;
 }
 
 
 
-header {
-    top: 50%;
-    transform: translateY(-50%);
-    height: 64px;
-    background-color: #24242467;
-    position: absolute;
-    width: 100%;
-}
+
 
 .landing__text {
     display: flex;
@@ -457,8 +473,7 @@ MOVIE LIST SECTION
 }
 
 section {
-    background: linear-gradient(0.95turn, #FFD700, #0004f8, #FFD700);
-
+    background: #0B132B;
 }
 
 #movies__main {
@@ -512,7 +527,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     text-align: center;
     transition: all 300ms ease;
     cursor: pointer;
-    background-color: rgba(49, 49, 49, 0.432);
+    background-color: #0850c4;
     border-radius: 10px;
     z-index: 40;
 }
@@ -524,7 +539,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     text-align: center;
     transition: all 300ms ease;
     cursor: pointer;
-    background-color: rgba(41, 40, 40, 0.329);
+    background-color: #0850c4;
     border-radius: 10px;
 }
 
@@ -688,7 +703,7 @@ TV LIST SECTION
     text-align: center;
     transition: all 300ms ease;
     cursor: pointer;
-    background-color: rgba(49, 49, 49, 0.432);
+    background-color: #0850c4;
     border-radius: 10px;
 }
 
@@ -698,7 +713,7 @@ TV LIST SECTION
     text-align: center;
     transition: all 300ms ease;
     cursor: pointer;
-    background-color: rgba(49, 49, 49, 0.432);
+    background-color: #0850c4;
     border-radius: 10px;
     z-index: 40;
 }
@@ -778,6 +793,8 @@ SINGLE MOVIE SECTION
     transition: all 300ms ease;
     font-weight: 500;
     font-size: 16px;
+    display: flex;
+    align-items: center;
 }
 
 .back__button:hover {
@@ -962,7 +979,7 @@ footer {
 }
 
 @media(max-width: 768px) {
-    .container{
+    .container {
         padding: 96px 16px;
     }
 
@@ -1070,7 +1087,7 @@ footer {
     }
 
     .no-title {
-        font-size: 72px;
+        font-size: 56px;
     }
 
     .film-one {
