@@ -97,7 +97,7 @@ function App() {
               </button>
               <div className="filter__choices">
                 <h1 className="filter__choice--text">
-                  Filter your recently searched by:
+                  Filter your search by:
                 </h1>
                 <Link to="/Movies">
                   <button className="filter__choice--button" onClick={() => { setFilterClose(true); setFilterOpen(false) }}>

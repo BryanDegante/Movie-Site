@@ -56,7 +56,7 @@ const Nav = ({ openMenu }) => {
 							className="filter__menu filter__button"
 							onClick={openMenu}
 						>
-							Filter
+							Search
 						</button>
 					</div>
 				</nav>
