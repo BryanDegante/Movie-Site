@@ -89,9 +89,21 @@ const MovieDetails = () => {
 								from: 'edges',
 							},
 						}
-					);
+			);
+			  timeLine.fromTo(
+					'.clip',
+					{
+						opacity: 0,
+					},
+					{
+						opacity: 1,
+						duration: 1.5,
+						delay: 2,
+					},
+					'<'
+				);
 		}
-		if (filterClose && !filterOpen) {
+		else if (filterClose && !filterOpen) {
 			timeLine.clear(); 
 			 timeLine.fromTo(
 					'.box',
@@ -110,17 +122,26 @@ const MovieDetails = () => {
 							grid: [rows, cols],
 							from: 'center',
 						},
+					}
+				);
+				timeLine.to(
+					'.clip',
+					{
+						opacity: 0,
+						duration: 1.5,
 						onComplete: () => {
 							document.body.classList.remove('filter--open');
 							setFilterOpen(false);
 							setFilterClose(false);
 						},
-					}
+					},
+					'<'
 				);
 		}
 	}, [filterOpen, filterClose])
 	
 	useGSAP(() => {
+		window.scrollTo(0,0)
 		timeLine.fromTo('#movieDetails', {
 			scale: 0,
 			opacity: 0,
@@ -138,7 +159,7 @@ const MovieDetails = () => {
 	},[])
 	
 	return (
-		<section ir="movie__info">
+		<section id="movie__info">
 			<div className="container ">
 				<div className="row">
 					<div className="back__button--wrapper">

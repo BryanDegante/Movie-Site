@@ -50,6 +50,12 @@ function App() {
             },
           }
         );
+      timeLine.fromTo('.menu__inner', {
+        scale: 0,
+      }, {
+        scale: 1,
+        duration: 1,
+      },"<")
     } else if (filterClose && !filterOpen) {
       timeLine.clear();
       timeLine.fromTo(
@@ -71,11 +77,16 @@ function App() {
           },
 
         }
-      ).then(() => {
-        document.body.classList.remove('filter--open');
-        setFilterOpen(false);
-        setFilterClose(false);
-      });
+      );
+      timeLine.to('.menu__inner', {
+        scale: 0,
+        duration: 1,
+      },"<")
+        .then(() => {
+          document.body.classList.remove('filter--open');
+          setFilterOpen(false);
+          setFilterClose(false);
+        });
     }
   }, [filterOpen, filterClose])
 
