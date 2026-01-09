@@ -15,21 +15,21 @@ const MovieDetailsCard = ({ movie }) => {
 					figureClass={'movie__description--poster'}
 				/>
 				<div className="movie__description--text">
-					<div id="movieDetails" className="movie__realease">
+					<div id='details' className="movie__realease">
 						<span className="sub-heading white bold">Released</span>
 						<span className="yellow">{movie.release_date}</span>
 					</div>
-					<div id="movieDetails" className="movie__runtime">
+					<div id='details' className="movie__runtime">
 						<span className="sub-heading white bold">Runtime</span>
 						<span className="yellow">{movie.runtime} min</span>
 					</div>
-					<div id="movieDetails" className="movie__Age-rating">
+					<div id='details' className="movie__Age-rating">
 						<span className="sub-heading white bold">Language</span>
 						<span className="yellow">
 							{movie.original_language}
 						</span>
 					</div>
-					<div id="movieDetails" className="movie__genre">
+					<div id='details' className="movie__genre">
 						<span className="sub-heading white bold">Genre</span>
 						{genres.map((g) => (
 							<span className="yellow" key={g.id}>
@@ -37,7 +37,7 @@ const MovieDetailsCard = ({ movie }) => {
 							</span>
 						))}
 					</div>
-					<div id="movieDetails" className="movie__plot">
+					<div id='details' className="movie__plot">
 						<span className="white bold">{movie.overview}</span>
 					</div>
 				</div>

@@ -1,75 +1,103 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ShowCard from './ShowCard';
 import { GrFormPrevious } from 'react-icons/gr';
 import { MdNavigateNext } from 'react-icons/md';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
-const getShowsPerSlide = () => { 
+const getShowsPerSlide = () => {
 	if (window.innerWidth < 600) return 2;
 	if (window.innerWidth < 1024) return 3;
 	return 4;
 }
 
 const TvCarousel = ({ shows, title }) => {
+	const trackRef = useRef(null);
+	const containerRef = useRef(null);
+	const viewportRef = useRef(null);
+
 	const [slideIndex, setSlideIndex] = useState(0);
-		const [showsPerSlide, setShowsPerSlide] = useState(getShowsPerSlide());
-	
-		useEffect(() => {
-			const handleResize = () => setShowsPerSlide(getShowsPerSlide());
-			window.addEventListener('resize', handleResize);
-			return () => window.removeEventListener('resize', handleResize);
-		}, []);
-	
-		const totalSlides = Math.ceil(shows.length / showsPerSlide);
-		const goToSlide = (idx) => setSlideIndex(idx);
-		const nextSlide = () => setSlideIndex((prev) => (prev + 1) % totalSlides);
-		const prevSlide = () =>
-			setSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-	
-		const start = slideIndex * showsPerSlide;
-		const end = start + showsPerSlide;
-		const visibleShows = shows.slice(start, end);
-		const slideWidth = `${100 / showsPerSlide}%`;
+	const [showsPerSlide, setShowsPerSlide] = useState(getShowsPerSlide());
+
+	useEffect(() => {
+		const handleResize = () => setShowsPerSlide(getShowsPerSlide());
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
+	useEffect(() => {
+		const newTotal = Math.max(1, Math.ceil(shows.length / showsPerSlide));
+		setSlideIndex((prev) => Math.min(prev, newTotal - 1));
+	}, [showsPerSlide, shows.length])
+
+	const totalSlides = Math.max(1, Math.ceil(shows.length / showsPerSlide))
+	const goToSlide = (idx) => setSlideIndex(idx);
+	const nextSlide = () =>
+		setSlideIndex((prev) => Math.min(prev + 1, totalSlides - 1));
+
+	const prevSlide = () => setSlideIndex((prev) => Math.max(prev - 1, 0));
+
+	useGSAP(() => {
+		const track = trackRef.current;
+		const viewport = viewportRef.current;
+		if (!track || !viewport) return;
+		const x = slideIndex * viewport.offsetWidth;
+
+		gsap.to(track, {
+			x: -x,
+			duration: 0.6,
+			ease: 'power3.inOut'
+		})
+	}, [slideIndex, showsPerSlide])
 
 	return (
 		<div className="carousel__container">
 			<h3 className="white">{title}</h3>
-			<div className="carousel">
-				<GrFormPrevious
-					className="arrow"
+			<div className="carousel" ref={containerRef}>
+				<button
+					className='arrow'
 					onClick={prevSlide}
-				></GrFormPrevious>
-				<div className="carousel__track">
-					{visibleShows.map((movie, i) => (
-						<div
-							className="slide"
-							key={movie.id}
-							style={{
-								flex: `0 0 ${slideWidth}`,
-								maxWidth: slideWidth,
-							}}
-						>
-							<ShowCard
-								title={movie.original_name}
-								date={movie.release_date}
-								id={movie.id}
-								posterPath={movie.backdrop_path}
-								card={'show'}
-							/>
-						</div>
-					))}
+					disabled={totalSlides <= 1}
+					aria-label='Previous'>
+					<GrFormPrevious />
+				</button>
+				<div className='carousel__viewport' ref={viewportRef}>
+					<div className="carousel__track" ref={trackRef}>
+						{shows.map((show, i) => (
+							<div
+								className="slide"
+								key={show.id}
+								style={{
+									flex: `0 0 ${100 / showsPerSlide}%`,
+									maxWidth: `${100 / showsPerSlide}%`,
+								}}
+							>
+								<ShowCard
+									title={show.name}
+									date={show.release_date}
+									id={show.id}
+									posterPath={show.backdrop_path}
+									card={'show'}
+								/>
+							</div>
+						))}
+					</div>
 				</div>
-				<MdNavigateNext
-					className="arrow"
-					onClick={nextSlide}
-				></MdNavigateNext>
+				<button
+								className="arrow"
+								onClick={nextSlide}
+								disabled={totalSlides <= 1}
+								aria-label="Next"
+							>
+								<MdNavigateNext />
+							</button>
 			</div>
 			<div className="carousel__dots">
 				{Array.from({ length: totalSlides }).map((_, idx) => (
 					<span
 						key={idx}
-						className={`carousel__dot${
-							slideIndex === idx ? ' active' : ''
-						}`}
+						className={`carousel__dot${slideIndex === idx ? ' active' : ''
+							}`}
 						onClick={() => goToSlide(idx)}
 					/>
 				))}

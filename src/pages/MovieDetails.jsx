@@ -142,7 +142,7 @@ const MovieDetails = () => {
 	
 	useGSAP(() => {
 		window.scrollTo(0,0)
-		timeLine.fromTo('#movieDetails', {
+		timeLine.fromTo('#details', {
 			scale: 0,
 			opacity: 0,
 		}, {
@@ -174,13 +174,13 @@ const MovieDetails = () => {
 					<div className="movie__description--single">
 						<div className="movie__description--header">
 							<h1
-								id="movieDetails"
+								id='details'
 								className="movie__title--single white"
 							>
 								{movie.original_title}
 							</h1>
 							<ul
-								id="movieDetails"
+								id='details'
 								className="movie__ratings--list"
 							>
 								<li className="movie__rating">
@@ -222,7 +222,7 @@ const MovieDetails = () => {
 								/>
 						</div>
 					)}
-					<div id='movieDetails' className="trailer__wrapper">
+					<div id='details' className="trailer__wrapper">
 						<button
 							className="trailer--button"
 							onClick={() => setFilterOpen(true)}

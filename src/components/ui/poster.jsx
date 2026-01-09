@@ -8,7 +8,7 @@ const Poster = ({ path, className,figureClass }) => {
 	}
 
 	return (
-		<figure id="movieDetails" className={figureClass}>
+		<figure id="details" className={figureClass}>
 			<img src={imgSrc} alt="" className={className} />
 		</figure>
 	);

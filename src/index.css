@@ -554,8 +554,8 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     background-color: #0850c4;
     border-radius: 10px;
 }
-.movie:hover{
-    box-shadow: 0 8px 16px 0 #ffffff;
+.movie:hover,.show:hover{
+    box-shadow: 0 2px 16px 0 #fff;
         filter: brightness(60%);
         transform: scale(1.05);
 }
@@ -741,7 +741,6 @@ TV LIST SECTION
     border-radius: 10px;
 }
 
-.show:hover,
 .show__stack:hover {
     box-shadow: 0 8px 16px 0 #ffffff;
     filter: brightness(60%);

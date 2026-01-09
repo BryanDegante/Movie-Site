@@ -66,7 +66,7 @@ const MovieCarousel = ({ movies, title }) => {
 
 				<div className="carousel__viewport" ref={viewportRef}>
 					<div className="carousel__track" ref={trackRef}>
-						{movies.map((movie) => (
+						{movies.map((movie,i) => (
 							<div
 								className="slide"
 								key={movie.id}
