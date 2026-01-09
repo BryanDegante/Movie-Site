@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { baseUrl, KEY } from '../constants';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
-import PageRotation from '../components/PageRotation';
+import PageRotation from '../components/ui/PageRotation';
 import ShowCard from '../components/ShowCard';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+gsap.registerPlugin(ScrollTrigger)
 const TvShows = () => {
 
 const [shows,setShows] = useState([]);
   const [resultsTotal, setResultsTotal] = useState(0);
   const [title, setTitle] = useState('');
   const [totalPages, setTotalPages] = useState();
+  const showRef = useRef(null)
   const [page, setPage] = useState(1);
 	const [isLoading, setIsLoading] = useState();
 	
@@ -36,9 +41,28 @@ const [shows,setShows] = useState([]);
 	}
 
 	useEffect(() => {
+		window.scrollTo(0,0)
 			getShows(title, page);
 		}, [page, title]);
 
+useGSAP(
+  () => {
+    gsap.utils.toArray('.show__stack').forEach((card) => {
+      gsap.fromTo(card, { autoAlpha: 0, y: 30 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+	ScrollTrigger.refresh();
+  },
+  { scope: showRef, dependencies: [shows] }
+);
 
 	return (
 		<>
@@ -66,7 +90,7 @@ const [shows,setShows] = useState([]);
 								</p>
 							</div>
 						)}
-						<div className="movies">
+						<div className="movies" ref={showRef}>
 							{isLoading ? (
 								<div className="movie__skeleton">
 									<div className="skeleton__body skeleton1"></div>

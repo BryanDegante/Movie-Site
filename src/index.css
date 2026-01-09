@@ -542,6 +542,9 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     background-color: #0850c4;
     border-radius: 10px;
     z-index: 40;
+    visibility: hidden;
+    opacity: 0;
+  transform: translateY(30px);
 }
 
 .movie {
@@ -732,8 +735,10 @@ TV LIST SECTION
     background-color: #0850c4;
     border-radius: 10px;
     z-index: 40;
+  visibility: hidden;
+    opacity: 0;
+  transform: translateY(30px);
 }
-
 .show__list--poster {
     max-height: 300px;
     width: 100%;
@@ -1066,11 +1071,7 @@ footer {
     .movie__stack,
     .show__stack {
         width: calc(100%/3);
-    }
-
-    .page__button {
-        color: #0004f8;
-    }
+    }   
 
     .logo {
         max-width: 150px;

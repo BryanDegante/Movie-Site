@@ -3,7 +3,11 @@ import MovieCard from '../components/MovieCard';
 import { baseUrl, KEY } from '../constants';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
-import PageRotation from '../components/PageRotation';
+import PageRotation from '../components/ui/PageRotation';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+gsap.registerPlugin(ScrollTrigger)
 
 const Movies = () => {
 	const [movies, setMovies] = useState([]);
@@ -12,7 +16,7 @@ const Movies = () => {
 	const [totalPages, setTotalPages] = useState();
 	const [page, setPage] = useState(1);
 	const [isLoading, setIsLoading] = useState();
-
+	const moviesRef = useRef(null);
 	async function getMovies(title, page) {
 		setIsLoading(true);
 		const { data } = await axios.get(
@@ -31,6 +35,7 @@ const Movies = () => {
 	}
 
 	useEffect(() => {
+		window.scrollTo(0, 0)
 		getMovies(title, page);
 	}, [page, title]);
 
@@ -52,7 +57,26 @@ const Movies = () => {
 	// 		setPage((prevPage) => prevPage + 1);
 	// 	}
 	// }
-	
+
+	useGSAP(
+  () => {
+    gsap.utils.toArray('.movie__stack').forEach((card) => {
+      gsap.fromTo(card, { autoAlpha: 0, y: 30 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+	ScrollTrigger.refresh();
+  },
+  { scope: moviesRef, dependencies: [movies] }
+);
+
 	return (
 		<>
 			<section id="movies__main">
@@ -81,7 +105,7 @@ const Movies = () => {
 								<select
 									id="filter"
 									defaultValue="DEFAULT"
-									
+
 								>
 									<option value="DEFAULT" disabled>
 										Sort
@@ -96,7 +120,7 @@ const Movies = () => {
 								</select>
 							</div>
 						)}
-						<div className="movies">
+						<div className="movies" ref={moviesRef}>
 							{isLoading ? (
 								<div className="movie__skeleton">
 									<div className="skeleton__body skeleton1"></div>
@@ -113,6 +137,7 @@ const Movies = () => {
 										key={movie.id}
 										id={movie.id}
 										posterPath={movie.poster_path}
+
 									/>
 								))
 							)}

@@ -9,6 +9,7 @@ const MovieCard = ({ title, date, id, posterPath, card }) => {
 			className={card}
 			onClick={() => navigate(`/MovieDetails/${id}`)}
 			key={id}
+			id='movie'
 		>
 			<Poster path={posterPath} className={'movie__list--poster'} />
 			<div className="movie__description">
