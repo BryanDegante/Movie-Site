@@ -20,11 +20,14 @@ const MovieCarousel = ({ movies, title }) => {
 	const [moviesPerSlide, setMoviesPerSlide] = useState(getMoviesPerSlide());
 	const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
 
-	useEffect(() => {
-		const handleResize = () => setMoviesPerSlide(getMoviesPerSlide());
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
+	 useEffect(() => {
+        const handleResize = () => {
+            setMoviesPerSlide(getMoviesPerSlide());
+            setViewportWidth(window.innerWidth); // Update viewport width on resize
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
 	useEffect(() => {
 		const newTotal = Math.max(1, Math.ceil(movies.length / moviesPerSlide));
