@@ -161,18 +161,18 @@ nav {
     background-color: #FFD700;
 }
 
-.menu__inner{
-background-color: #234061;
-position: fixed;
+.menu__inner {
+    background-color: #234061;
+    position: fixed;
     left: 50%;
     top: 50%;
     padding: 48px 32px;
     transform: translate(-50%, -50%);
-        border-radius: 12px;
-        max-width: 560px;
-        width: 90%;
-        z-index: 9999;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    max-width: 560px;
+    width: 90%;
+    z-index: 9999;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     z-index: 9999;
 }
 
@@ -348,8 +348,6 @@ position: fixed;
 }
 
 #home {
-    display: flex;
-    justify-content: center;
     flex: 1;
     padding: 0 32px;
 }
@@ -376,7 +374,7 @@ Carousel
     width: 100%;
 }
 
-.carousel__viewport{
+.carousel__viewport {
     overflow: hidden;
     margin: 0 20px;
     width: 100%;
@@ -384,12 +382,12 @@ Carousel
 
 .carousel__track {
     display: flex;
-   will-change: transform;
+    will-change: transform;
 }
 
 .slide {
     padding: 0 12px;
-    margin: 20px 0                                                                                          ;
+    margin: 20px 0;
     transition: transform 0.5s;
     box-sizing: border-box;
 }
@@ -402,12 +400,14 @@ Carousel
     transition: color 0.2s;
     z-index: 2;
     background: transparent;
-    /* remove default button bg */
     border: none;
-    /* remove default button border */
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.arrow__icon:hover{
+    color: #fff;
 }
 
 .arrow:disabled {
@@ -418,6 +418,7 @@ Carousel
 .carousel__dots {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 8px;
 }
 
@@ -432,7 +433,7 @@ Carousel
     transition: opacity 0.2s;
 }
 
-.carousel__dot:hover {
+.carousel__dot:hover{
     background-color: #fff;
     opacity: 1;
 }
@@ -547,7 +548,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     z-index: 40;
     visibility: hidden;
     opacity: 0;
-  transform: translateY(30px);
+    transform: translateY(30px);
 }
 
 .movie {
@@ -560,10 +561,12 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     background-color: #0850c4;
     border-radius: 10px;
 }
-.movie:hover,.show:hover{
+
+.movie:hover,
+.show:hover {
     box-shadow: 0 2px 16px 0 #fff;
-        filter: brightness(60%);
-        transform: scale(1.05);
+    filter: brightness(60%);
+    transform: scale(1.05);
 }
 
 .movie__list--poster {
@@ -738,10 +741,11 @@ TV LIST SECTION
     background-color: #0850c4;
     border-radius: 10px;
     z-index: 40;
-  visibility: hidden;
+    visibility: hidden;
     opacity: 0;
-  transform: translateY(30px);
+    transform: translateY(30px);
 }
+
 .show__list--poster {
     max-height: 300px;
     width: 100%;
@@ -1000,22 +1004,27 @@ footer {
         max-width: 300px;
     }
 
-    .carousel__viewport{
+    .carousel__viewport {
         margin: 0 10px;
     }
 
-    .slide{
+    .slide {
         padding: 0 8px;
-        margin: 16px 0; 
+        margin: 16px 0;
     }
 
-    .arrow{
+    .arrow {
         font-size: 28px;
         margin: 12px 0;
     }
 }
 
 @media(max-width: 768px) {
+
+    .nav__link {
+        font-size: 18px;
+    }
+
     .container {
         padding: 96px 16px;
     }
@@ -1081,32 +1090,45 @@ footer {
         max-width: 700px;
     }
 
-
     .carousel__viewport {
-        margin: 0 5px; /* Further reduce margins */
+        margin: 0 5px;
+        /* Further reduce margins */
     }
 
     .slide {
-        padding: 0 6px; /* Further reduce padding */
-        margin: 12px 0; /* Further reduce vertical margin */
+        padding: 0 6px;
+        /* Further reduce padding */
+        margin: 12px 0;
+        /* Further reduce vertical margin */
     }
 
     .arrow {
-        font-size: 24px; /* Smaller arrows */
-        margin: 8px 0; /* Smaller margin */
+        font-size: 24px;
+        /* Smaller arrows */
+        margin: 8px 0;
+        /* Smaller margin */
     }
 
 }
 
 @media(max-width: 550px) {
 
+    .nav__link {
+        font-size: 16px;
+    }
+
+    .filter__button{
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+
     .movie__stack,
     .show__stack {
         width: calc(100%/3);
-    }   
+    }
 
     .logo {
-        max-width: 150px;
+        max-width: 125px;
         max-height: 50px;
     }
 
@@ -1156,19 +1178,16 @@ footer {
         width: 200px
     }
 
-     /* New carousel adjustments for 550px */
+
     .carousel__viewport {
-        margin: 0 2px; /* Minimal margins for very small screens */
+        margin: 0 2px;
     }
 
     .slide {
-        padding: 0 4px; /* Minimal padding */
-        margin: 8px 0; /* Minimal vertical margin */
+        padding: 0 8px;
+        margin: 8px 0;
     }
 
-    .arrow {
-        font-size: 20px; /* Smallest arrows */
-        margin: 4px 0; /* Minimal margin */
-    }
+   
 
 }

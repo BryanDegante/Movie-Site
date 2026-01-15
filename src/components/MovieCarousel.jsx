@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MovieCard from './MovieCard';
-import { GrFormPrevious } from 'react-icons/gr';
-import { MdNavigateNext } from 'react-icons/md';
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
@@ -18,12 +17,10 @@ const MovieCarousel = ({ movies, title }) => {
 
 	const [slideIndex, setSlideIndex] = useState(0);
 	const [moviesPerSlide, setMoviesPerSlide] = useState(getMoviesPerSlide());
-	const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
 
 	 useEffect(() => {
         const handleResize = () => {
             setMoviesPerSlide(getMoviesPerSlide());
-            setViewportWidth(window.innerWidth); // Update viewport width on resize
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -55,24 +52,15 @@ const MovieCarousel = ({ movies, title }) => {
 			duration: 0.6,
 			ease: 'power3.inOut',
 		});
-	}, [slideIndex, moviesPerSlide,viewportWidth]);
+	}, [slideIndex, moviesPerSlide]);
 
 	return (
 		<div className="carousel__container">
 			<h3 className="white">{title}</h3>
 			<div className="carousel" ref={containerRef}>
-				<button
-					className="arrow"
-					onClick={prevSlide}
-					disabled={totalSlides <= 1}
-					aria-label="Previous"
-				>
-					<GrFormPrevious />
-				</button>
-
 				<div className="carousel__viewport" ref={viewportRef}>
 					<div className="carousel__track" ref={trackRef}>
-						{movies.map((movie,i) => (
+						{movies.map((movie, i) => (
 							<div
 								className="slide"
 								key={movie.id}
@@ -92,16 +80,16 @@ const MovieCarousel = ({ movies, title }) => {
 						))}
 					</div>
 				</div>
-			<button
-				className="arrow"
-				onClick={nextSlide}
-				disabled={totalSlides <= 1}
-				aria-label="Next"
-			>
-				<MdNavigateNext />
-			</button>
 			</div>
 			<div className="carousel__dots">
+			<button
+				className="arrow"
+				onClick={prevSlide}
+				disabled={totalSlides <= 1}
+				aria-label="Previous"
+			>
+				<GrFormPrevious className='arrow__icon' />
+			</button>
 				{Array.from({ length: totalSlides }).map((_, idx) => (
 					<span
 						key={idx}
@@ -111,6 +99,14 @@ const MovieCarousel = ({ movies, title }) => {
 						onClick={() => goToSlide(idx)}
 					/>
 				))}
+			<button
+				className="arrow"
+				onClick={nextSlide}
+				disabled={totalSlides <= 1}
+				aria-label="Next"
+			>
+				<GrFormNext className='arrow__icon'/>
+			</button>
 			</div>
 		</div>
 	);

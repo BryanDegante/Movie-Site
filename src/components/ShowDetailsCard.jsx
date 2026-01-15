@@ -1,6 +1,4 @@
-import React from 'react';
 import Poster from './ui/poster';
-import Backdrop from './ui/Backdrop';
 
 const ShowDetailsCard = ({ show }) => {
 	const genres = show.genres || [];

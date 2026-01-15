@@ -32,10 +32,12 @@ const MovieDetails = () => {
 		fs: 1,
 		playerVars: {
 			autoplay: 1,
-			controls: 0,
+			controls: 1,
+			fs: 1,
 			rel: 0,
 			showinfo: 0,
 			loop: 1,
+			playsinline: 1,
 		},
 	};
 	

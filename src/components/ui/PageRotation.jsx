@@ -1,7 +1,5 @@
 
-import { useState } from 'react';
-import { GrFormPrevious } from 'react-icons/gr';
-import { MdNavigateNext } from 'react-icons/md';
+import { GrFormPrevious,GrFormNext } from 'react-icons/gr';
 
 const PageRotation = ({ totalPages, pageNum, pageChange }) => {
     function prevMoviePage() {
@@ -25,7 +23,7 @@ const PageRotation = ({ totalPages, pageNum, pageChange }) => {
                             <p className="total-pages">
                                 {pageNum} of {totalPages}
                             </p>
-                            <MdNavigateNext
+                            <GrFormNext
                                 className="page__button"
                                 onClick={nextMoviePage}
                             />

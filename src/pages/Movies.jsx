@@ -44,20 +44,6 @@ const Movies = () => {
 		getMovies(title, elm);
 	}
 
-	// IN CASE IT DOESNT WORK
-
-	// function prevMoviePage() {
-	// 	if (page !== 1) {
-	// 		setPage((prevPage) => prevPage - 1);
-	// 	}
-	// }
-
-	// function nextMoviePage() {
-	// 	if (page !== totalPages) {
-	// 		setPage((prevPage) => prevPage + 1);
-	// 	}
-	// }
-
 	useGSAP(
   () => {
     gsap.utils.toArray('.movie__stack').forEach((card) => {
@@ -102,22 +88,7 @@ const Movies = () => {
 									</span>
 									"
 								</p>
-								<select
-									id="filter"
-									defaultValue="DEFAULT"
-
-								>
-									<option value="DEFAULT" disabled>
-										Sort
-									</option>
-									<option value="LOW_TO_HIGH">
-										Price, Low to High
-									</option>
-									<option value="HIGH_TO_LOW">
-										Price, High to Low
-									</option>
-									<option value="RATING">Rating</option>
-								</select>
+								
 							</div>
 						)}
 						<div className="movies" ref={moviesRef}>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ShowCard from './ShowCard';
-import { GrFormPrevious } from 'react-icons/gr';
-import { MdNavigateNext } from 'react-icons/md';
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
@@ -57,16 +56,7 @@ const TvCarousel = ({ shows, title }) => {
 		<div className="carousel__container">
 			<h3 className="white">{title}</h3>
 			<div className="carousel" ref={containerRef}>
-				<button
-					className='arrow'
-					onClick={prevSlide}
-					disabled={totalSlides <= 1}
-					aria-label='Previous'
-				>
-					<GrFormPrevious />
-				</button>
-
-				<div className='carousel__viewport' ref={viewportRef}>
+				<div className="carousel__viewport" ref={viewportRef}>
 					<div className="carousel__track" ref={trackRef}>
 						{shows.map((show, i) => (
 							<div
@@ -88,24 +78,33 @@ const TvCarousel = ({ shows, title }) => {
 						))}
 					</div>
 				</div>
+			</div>
+			<div className="carousel__dots">
+				<button
+					className="arrow"
+					onClick={prevSlide}
+					disabled={totalSlides <= 1}
+					aria-label="Previous"
+				>
+					<GrFormPrevious className='arrow__icon'/>
+				</button>
+				{Array.from({ length: totalSlides }).map((_, idx) => (
+					<span
+						key={idx}
+						className={`carousel__dot${
+							slideIndex === idx ? ' active' : ''
+						}`}
+						onClick={() => goToSlide(idx)}
+					/>
+				))}
 				<button
 					className="arrow"
 					onClick={nextSlide}
 					disabled={totalSlides <= 1}
 					aria-label="Next"
 				>
-					<MdNavigateNext />
+					<GrFormNext className='arrow__icon'/>
 				</button>
-			</div>
-			<div className="carousel__dots">
-				{Array.from({ length: totalSlides }).map((_, idx) => (
-					<span
-						key={idx}
-						className={`carousel__dot${slideIndex === idx ? ' active' : ''
-							}`}
-						onClick={() => goToSlide(idx)}
-					/>
-				))}
 			</div>
 		</div>
 	);
