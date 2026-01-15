@@ -6,8 +6,8 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
 const getShowsPerSlide = () => {
-	if (window.innerWidth < 600) return 2;
-	if (window.innerWidth < 1024) return 3;
+	if (window.innerWidth <= 600) return 2;
+	if (window.innerWidth <= 1024) return 3;
 	return 4;
 }
 
@@ -31,11 +31,14 @@ const TvCarousel = ({ shows, title }) => {
 	}, [showsPerSlide, shows.length])
 
 	const totalSlides = Math.max(1, Math.ceil(shows.length / showsPerSlide))
+
 	const goToSlide = (idx) => setSlideIndex(idx);
 	const nextSlide = () =>
 		setSlideIndex((prev) => Math.min(prev + 1, totalSlides - 1));
 
 	const prevSlide = () => setSlideIndex((prev) => Math.max(prev - 1, 0));
+
+	const slideWidth = `${100 / showsPerSlide}%`;
 
 	useGSAP(() => {
 		const track = trackRef.current;
@@ -58,9 +61,11 @@ const TvCarousel = ({ shows, title }) => {
 					className='arrow'
 					onClick={prevSlide}
 					disabled={totalSlides <= 1}
-					aria-label='Previous'>
+					aria-label='Previous'
+				>
 					<GrFormPrevious />
 				</button>
+
 				<div className='carousel__viewport' ref={viewportRef}>
 					<div className="carousel__track" ref={trackRef}>
 						{shows.map((show, i) => (
@@ -68,8 +73,8 @@ const TvCarousel = ({ shows, title }) => {
 								className="slide"
 								key={show.id}
 								style={{
-									flex: `0 0 ${100 / showsPerSlide}%`,
-									maxWidth: `${100 / showsPerSlide}%`,
+									flex: `0 0 ${slideWidth}`,
+									maxWidth: slideWidth,
 								}}
 							>
 								<ShowCard
@@ -84,13 +89,13 @@ const TvCarousel = ({ shows, title }) => {
 					</div>
 				</div>
 				<button
-								className="arrow"
-								onClick={nextSlide}
-								disabled={totalSlides <= 1}
-								aria-label="Next"
-							>
-								<MdNavigateNext />
-							</button>
+					className="arrow"
+					onClick={nextSlide}
+					disabled={totalSlides <= 1}
+					aria-label="Next"
+				>
+					<MdNavigateNext />
+				</button>
 			</div>
 			<div className="carousel__dots">
 				{Array.from({ length: totalSlides }).map((_, idx) => (

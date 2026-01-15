@@ -3,7 +3,7 @@ import Poster from "./ui/poster";
 
 const MovieDetailsCard = ({ movie }) => {
 	const genres = movie.genres || [];
-	
+	const languages = movie.spoken_languages || [];
 
 
   return (
@@ -26,7 +26,11 @@ const MovieDetailsCard = ({ movie }) => {
 					<div id='details' className="movie__Age-rating">
 						<span className="sub-heading white bold">Language</span>
 						<span className="yellow">
-							{movie.original_language}
+							{languages.map((l) =>(
+								<span className="yellow">
+									| {l.english_name} |
+								</span>
+							))}
 						</span>
 					</div>
 					<div id='details' className="movie__genre">

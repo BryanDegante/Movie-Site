@@ -51,7 +51,7 @@ const videoOptions = {
 			);
 
 			const trailer = data.results.find(
-				(video) => video.type === 'Trailer'
+				(video) => (video.type === 'Trailer' || video.type === 'Opening Credits')
 			);
 			if (trailer) {
 				setVideoKey(trailer.key);
@@ -59,7 +59,7 @@ const videoOptions = {
 		}
 		getVideos();
 		getDetails();
-	}, [JSON.stringify(show), id]);
+	}, [ id]);
 
 	const timeLine = gsap.timeline();
 

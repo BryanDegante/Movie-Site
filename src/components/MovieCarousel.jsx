@@ -18,6 +18,7 @@ const MovieCarousel = ({ movies, title }) => {
 
 	const [slideIndex, setSlideIndex] = useState(0);
 	const [moviesPerSlide, setMoviesPerSlide] = useState(getMoviesPerSlide());
+	const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
 
 	useEffect(() => {
 		const handleResize = () => setMoviesPerSlide(getMoviesPerSlide());
@@ -38,6 +39,8 @@ const MovieCarousel = ({ movies, title }) => {
 
 	const prevSlide = () => setSlideIndex((prev) => Math.max(prev - 1, 0));
 
+	const slideWidth = `${100 / moviesPerSlide}%`;
+
 	useGSAP(() => {
 		const track = trackRef.current;
 		const viewport = viewportRef.current;
@@ -49,7 +52,7 @@ const MovieCarousel = ({ movies, title }) => {
 			duration: 0.6,
 			ease: 'power3.inOut',
 		});
-	}, [slideIndex, moviesPerSlide]);
+	}, [slideIndex, moviesPerSlide,viewportWidth]);
 
 	return (
 		<div className="carousel__container">
@@ -71,8 +74,8 @@ const MovieCarousel = ({ movies, title }) => {
 								className="slide"
 								key={movie.id}
 								style={{
-									flex: `0 0 ${100 / moviesPerSlide}%`,
-									maxWidth: `${100 / moviesPerSlide}%`,
+									flex: `0 0 ${slideWidth}`,
+									maxWidth: slideWidth,
 								}}
 							>
 								<MovieCard

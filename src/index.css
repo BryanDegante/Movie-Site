@@ -371,6 +371,9 @@ Carousel
 
 .carousel__container {
     margin-bottom: 16px;
+    overflow: hidden;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .carousel__viewport{
@@ -988,13 +991,27 @@ footer {
 
 }
 
-@media(max-width: 1024px) {
+@media(max-width: 1200px) {
     .search__wrapper {
         width: 700px;
     }
 
     .movie__poster {
         max-width: 300px;
+    }
+
+    .carousel__viewport{
+        margin: 0 10px;
+    }
+
+    .slide{
+        padding: 0 8px;
+        margin: 16px 0; 
+    }
+
+    .arrow{
+        font-size: 28px;
+        margin: 12px 0;
     }
 }
 
@@ -1064,6 +1081,21 @@ footer {
         max-width: 700px;
     }
 
+
+    .carousel__viewport {
+        margin: 0 5px; /* Further reduce margins */
+    }
+
+    .slide {
+        padding: 0 6px; /* Further reduce padding */
+        margin: 12px 0; /* Further reduce vertical margin */
+    }
+
+    .arrow {
+        font-size: 24px; /* Smaller arrows */
+        margin: 8px 0; /* Smaller margin */
+    }
+
 }
 
 @media(max-width: 550px) {
@@ -1122,6 +1154,21 @@ footer {
 
     .footer__logo--img {
         width: 200px
+    }
+
+     /* New carousel adjustments for 550px */
+    .carousel__viewport {
+        margin: 0 2px; /* Minimal margins for very small screens */
+    }
+
+    .slide {
+        padding: 0 4px; /* Minimal padding */
+        margin: 8px 0; /* Minimal vertical margin */
+    }
+
+    .arrow {
+        font-size: 20px; /* Smallest arrows */
+        margin: 4px 0; /* Minimal margin */
     }
 
 }
