@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# 🎬 Movie Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com/)
+[![TMDB](https://img.shields.io/badge/TMDB-01D277?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABn0lEQVQ4jZXTTUtCURiG8d/ZhCm0F7qFsd4kChQ1pEI6CNLSEoTg1qJFcIhRTbYQxlqgYEEBhZr2F1M9ZJ+Z3Tz3eDNMbkg1+V7vfs7M2aH7WB8lNnA4c6BBK2K1K1JvH0bFht1xbZFCVQezlO/htD6hMfS3TZ7K/9eQTuqaotmSYmUuax2q6u8+eX9wPdX7Z2J/K5XPOMa0zUr9jTbS7znC8i8y+VKpMpt7NoNn+6UeJ/B3Yv3n9iO+YX13J6v9N2W0k5Kvw/hyYlEbSvxc8pTU6t8UpbtJxI1yWL5ZfQhvu9QhXa7hV3/0tzaxuL9nW1TsZyE4HlWpkS05g+l0lS2+ohHcR9Xhw6/Ny+8LjthcmyM7cWeM/3fGDNmM5x/2UJ4bYV2R5fMYk1X11RR3p8x0WvJ1Mkx6PyI27A/2xj0VtNTM0AAAAASUVORK5CYII=)](https://www.themoviedb.org/)
 
-## Available Scripts
+A dynamic and interactive movie web application built with **React**, featuring smooth animations, real-time movie data, and easy navigation. Hosted on **Vercel** and powered by the **TMDB API**.
 
-In the project directory, you can run:
+## 🌐 Live Demo
 
-### `npm start`
+Check out the live version here: [Movie Site](https://movie-site-iota-six.vercel.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Movie Listings:** Browse popular and trending movies in real-time.
+- **Search Functionality:** Find movies or Tv shows by title using TMDB API.
+- **Smooth Animations:** Engaging animations using **GSAP** for a polished UX.
+- **Responsive Design:** Custom CSS ensures a beautiful experience across devices.
+- **Client-Side Routing:** Navigate seamlessly with **React Router**.
+- **Hosted on Vercel:** Fast and reliable hosting.
 
-### `npm test`
+## 🛠️ Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React** – Component-based UI.
+- **JavaScript (ES6+)** – Dynamic and interactive functionality.
+- **GSAP** – Smooth animations and transitions.
+- **Custom CSS** – Fully customized styling.
+- **React Router** – Navigation between pages without reload.
+- **TMDB API** – Fetching up-to-date movie data.
+- **Vercel** – Deployment and hosting.
 
-### `npm run build`
+## 🔗 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Make sure you have **Node.js** and **npm** installed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+node -v
+npm -v
