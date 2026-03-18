@@ -8,7 +8,7 @@ const Footer = (props) => {
 					<figure>
 						<img
 							className="footer__logo--img"
-							src="/blinker-icon.4f9b2663.png"
+							src="/ClearLogo.png"
 							alt=""
 						/>
 					</figure>

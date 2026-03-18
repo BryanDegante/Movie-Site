@@ -36,7 +36,7 @@ const Nav = ({ openMenu }) => {
 				<nav>
 					<Link to="/">
 						<img
-							src="/Clearlogo.png"
+							src="/ClearLogo.png"
 							className="logo"
 							alt=""
 						/>
