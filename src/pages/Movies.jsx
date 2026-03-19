@@ -60,19 +60,16 @@ const Movies = () => {
 	function search(elm) {
 		setTitle(elm);
 		setPage(1);
-		getMovies(elm, 1);
 	}
 
 	function pageChange(elm) {
 		setPage(elm);
-		getMovies(title, elm);
 	}
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		getMovies(title, page);
 	}, [page, title]);
-
 	const sortedMovies = [...movies].sort(
 		sortFunctions[sortOption] || sortFunctions.default,
 	);

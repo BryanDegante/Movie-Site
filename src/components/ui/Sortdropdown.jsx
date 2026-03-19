@@ -49,7 +49,10 @@ const SortDropdown = ({ options, selected, onChange, label = 'Sort' }) => {
 						<div
 							key={option.value}
 							className={`sort__item ${selected === option.value ? 'selected' : ''} ${option.value === '' ? 'reset' : ''}`}
-							onClick={() => onChange(option.value)}
+                            onClick={() => {
+                                onChange(option.value); 
+                                setIsOpen(false);
+                            }}
 						>
 							{option.label}
 						</div>
